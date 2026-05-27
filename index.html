@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aahaar — Know Your Food. Heal From Within.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root[data-theme="light"] {
+  --bg: #FBF6EC; --bg-warm: #F5EDD9; --bg-paper: #FFFEF8; --surface: #FFFAEF; --surface-raised: #FFFFFF;
+  --turmeric: #D9892D; --turmeric-deep: #B36A14; --turmeric-light: #F4C77B; --saffron: #E8A33B;
+  --deep-red: #8B2A1E; --deep-red-light: #C44A38; --maroon: #5C1410;
+  --leaf: #5A7A3F; --leaf-deep: #3D5628; --cardamom: #6B8E5A;
+  --ink: #2A1810; --text: #2A1810; --text-soft: #5C4030; --text-muted: #8B6F55;
+  --border: rgba(139,42,30,0.15); --border-strong: rgba(139,42,30,0.3);
+  --shadow: 0 2px 20px rgba(139,42,30,0.06); --shadow-lifted: 0 8px 30px rgba(139,42,30,0.12);
+}
+:root[data-theme="dark"] {
+  --bg: #1A120A; --bg-warm: #221810; --bg-paper: #2A1F14; --surface: #2A1F14; --surface-raised: #352718;
+  --turmeric: #E8A33B; --turmeric-deep: #D9892D; --turmeric-light: #F4C77B; --saffron: #F4C77B;
+  --deep-red: #C44A38; --deep-red-light: #E36B57; --maroon: #8B2A1E;
+  --leaf: #7A9D5E; --leaf-deep: #5A7A3F; --cardamom: #7A9D5E;
+  --ink: #F5EDD9; --text: #F5EDD9; --text-soft: #D4C3A0; --text-muted: #9A8568;
+  --border: rgba(244,199,123,0.18); --border-strong: rgba(244,199,123,0.35);
+  --shadow: 0 2px 20px rgba(0,0,0,0.4); --shadow-lifted: 0 8px 30px rgba(0,0,0,0.5);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; transition: background 0.3s, color 0.3s; position: relative; }
+body::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; background-image: radial-gradient(circle at 20% 30%, rgba(217,137,45,0.05) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(139,42,30,0.04) 0%, transparent 50%); }
+.container { position: relative; z-index: 1; }
+
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(251,246,236,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; transition: background 0.3s; }
+[data-theme="dark"] nav { background: rgba(26,18,10,0.92); }
+.nav-logo { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 500; color: var(--deep-red); letter-spacing: -0.01em; text-decoration: none; display: flex; align-items: baseline; gap: 8px; }
+.nav-logo .tagline { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; color: var(--text-muted); font-size: 12px; letter-spacing: 0.04em; }
+.beta-badge { display: inline-flex; align-items: center; gap: 5px; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 10px; background: rgba(217,137,45,0.15); color: var(--turmeric-deep); border: 1px solid rgba(217,137,45,0.4); margin-left: 8px; }
+.beta-badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--turmeric); box-shadow: 0 0 0 3px rgba(217,137,45,0.2); animation: betaPulse 2.5s ease-in-out infinite; }
+@keyframes betaPulse { 0%, 100% { box-shadow: 0 0 0 0px rgba(217,137,45,0.4); } 50% { box-shadow: 0 0 0 5px rgba(217,137,45,0); } }
+[data-theme="dark"] .beta-badge { background: rgba(244,199,123,0.15); color: var(--saffron); border-color: rgba(244,199,123,0.4); }
+.logo-mark { width: 28px; height: 28px; display: inline-block; vertical-align: -6px; margin-right: 4px; }
+.nav-links { display: flex; gap: 1.75rem; list-style: none; align-items: center; }
+.nav-links a { color: var(--text-soft); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--deep-red); }
+.nav-tools { display: flex; gap: 10px; align-items: center; }
+.tool-btn { background: transparent; border: 1px solid var(--border); color: var(--text-soft); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; font-size: 16px; }
+.tool-btn:hover { background: var(--bg-warm); border-color: var(--deep-red); color: var(--deep-red); }
+.lang-select { background: transparent; border: 1px solid var(--border); color: var(--text-soft); padding: 7px 12px; border-radius: 18px; font-family: 'Inter', sans-serif; font-size: 12px; cursor: pointer; outline: none; transition: all 0.2s; }
+.lang-select:hover { border-color: var(--deep-red); color: var(--deep-red); }
+.nav-cta { background: var(--deep-red); color: var(--bg-paper) !important; padding: 9px 20px; border-radius: 22px; font-size: 13px; font-weight: 500; border: none; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+.nav-cta:hover { background: var(--maroon); transform: translateY(-1px); box-shadow: var(--shadow-lifted); }
+
+.hero { min-height: 92vh; display: flex; align-items: center; padding: 130px 2rem 60px; position: relative; overflow: hidden; }
+.hero-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; width: 100%; }
+.hero-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-warm); border: 1px solid var(--border-strong); color: var(--deep-red); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; padding: 7px 16px; border-radius: 20px; margin-bottom: 2rem; text-transform: uppercase; }
+.hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--turmeric); border-radius: 50%; }
+.hero h1 { font-family: 'Fraunces', serif; font-size: clamp(44px, 6.5vw, 78px); font-weight: 400; line-height: 1.02; letter-spacing: -0.02em; margin-bottom: 1.5rem; color: var(--text); }
+.hero h1 em { font-style: italic; color: var(--deep-red); font-weight: 300; }
+.hero h1 .underline { background-image: linear-gradient(transparent 80%, var(--turmeric-light) 80%); padding: 0 4px; }
+.hero-sub { font-size: 19px; color: var(--text-soft); font-weight: 400; max-width: 540px; margin-bottom: 2rem; line-height: 1.55; }
+.hero-moat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 2rem 0 2.5rem; max-width: 580px; }
+.hero-ask { background: var(--bg-paper); border: 1px solid var(--border-strong); border-radius: 16px; padding: 1.25rem; margin: 1.75rem 0 1.5rem; max-width: 580px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+.hero-ask::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--deep-red), var(--turmeric), var(--leaf)); }
+.hero-ask-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.hero-ask-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--leaf); box-shadow: 0 0 0 3px rgba(90,122,63,0.2); flex-shrink: 0; }
+.hero-ask-title { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 500; color: var(--text); }
+.hero-ask-beta { margin-left: auto; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 10px; background: rgba(217,137,45,0.15); color: var(--turmeric-deep); border: 1px solid rgba(217,137,45,0.4); }
+[data-theme="dark"] .hero-ask-beta { background: rgba(244,199,123,0.15); color: var(--saffron); border-color: rgba(244,199,123,0.4); }
+.hero-ask-input-row { display: flex; gap: 8px; margin-bottom: 12px; }
+.hero-ask-input { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 22px; padding: 11px 16px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s; }
+.hero-ask-input:focus { border-color: var(--turmeric); }
+.hero-ask-input::placeholder { color: var(--text-muted); }
+.hero-ask-send { background: var(--deep-red); color: var(--bg-paper); border: none; padding: 11px 20px; border-radius: 22px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.hero-ask-send:hover { background: var(--maroon); }
+.hero-ask-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.hero-ask-chip { font-size: 11px; color: var(--text-soft); background: var(--surface); border: 1px solid var(--border); padding: 5px 11px; border-radius: 14px; cursor: pointer; transition: all 0.2s; }
+.hero-ask-chip:hover { border-color: var(--deep-red); color: var(--deep-red); background: var(--bg-warm); }
+.hero-ask-answer { background: var(--surface); border-radius: 10px; padding: 12px 14px; border-left: 3px solid var(--turmeric); margin-bottom: 10px; }
+.hero-ask-answer-text { font-size: 13px; color: var(--text-soft); line-height: 1.6; margin-bottom: 8px; }
+.hero-ask-cite { font-size: 11px; color: var(--text-muted); display: flex; gap: 5px; flex-wrap: wrap; align-items: center; }
+.hero-ask-cite a { background: var(--bg-warm); border: 1px solid var(--border); padding: 2px 8px; border-radius: 11px; color: var(--deep-red); text-decoration: none; font-weight: 500; font-size: 10px; transition: all 0.2s; }
+.hero-ask-cite a:hover { background: var(--deep-red); color: var(--bg-paper); }
+.hero-ask-note { font-size: 10px; color: var(--text-muted); font-style: italic; line-height: 1.45; }
+.moat-chip { background: var(--bg-paper); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; text-align: left; transition: all 0.2s; }
+.moat-chip:hover { border-color: var(--turmeric); transform: translateY(-2px); box-shadow: var(--shadow); }
+.moat-chip-label { font-family: 'Fraunces', serif; font-size: 12px; font-style: italic; color: var(--text-muted); margin-bottom: 4px; }
+.moat-chip-word { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; color: var(--deep-red); line-height: 1.1; margin-bottom: 2px; }
+.moat-chip-the { font-size: 11px; color: var(--text-muted); font-style: italic; }
+.hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.btn-primary { background: var(--deep-red); color: var(--bg-paper); border: none; padding: 14px 28px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; border-radius: 28px; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary:hover { background: var(--maroon); transform: translateY(-1px); box-shadow: var(--shadow-lifted); }
+.btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-strong); padding: 13px 28px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; border-radius: 28px; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+.btn-secondary:hover { background: var(--bg-warm); border-color: var(--deep-red); }
+.waitlist-note { font-size: 13px; color: var(--text-muted); margin-top: 1rem; font-style: italic; }
+.waitlist-note strong { color: var(--turmeric-deep); font-weight: 500; font-style: normal; }
+
+.hero-visual { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; }
+.hero-thali { width: 100%; max-width: 540px; height: auto; filter: drop-shadow(0 12px 30px rgba(139,42,30,0.18)); transition: transform 0.5s ease; }
+.hero-thali:hover { transform: scale(1.02) rotate(-1deg); }
+.hero-thali-caption { position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); font-family: 'Fraunces', serif; font-style: italic; font-size: 13px; color: var(--text-muted); letter-spacing: 0.02em; white-space: nowrap; text-align: center; }
+.hero-thali-labels { position: absolute; inset: 0; pointer-events: none; }
+.thali-label { position: absolute; font-family: 'Fraunces', serif; font-style: italic; font-size: 11px; color: var(--text-soft); background: var(--bg-paper); padding: 4px 10px; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); opacity: 0; animation: labelFadeIn 0.6s ease forwards; }
+.thali-label-1 { top: 4%; left: 36%; animation-delay: 0.5s; }
+.thali-label-2 { top: 18%; right: 2%; animation-delay: 0.7s; }
+.thali-label-3 { top: 62%; right: -2%; animation-delay: 0.9s; }
+.thali-label-4 { bottom: 8%; left: 38%; animation-delay: 1.1s; }
+.thali-label-5 { top: 62%; left: -2%; animation-delay: 1.3s; }
+.thali-label-6 { top: 18%; left: -2%; animation-delay: 1.5s; }
+@keyframes labelFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+[data-theme="dark"] .hero-thali { filter: drop-shadow(0 12px 30px rgba(0,0,0,0.5)); }
+
+section { padding: 100px 2rem; max-width: 1280px; margin: 0 auto; position: relative; }
+.section-label { display: inline-block; font-family: 'Fraunces', serif; font-style: italic; font-size: 14px; color: var(--turmeric-deep); margin-bottom: 1rem; }
+.section-title { font-family: 'Fraunces', serif; font-size: clamp(36px, 5vw, 56px); font-weight: 400; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.25rem; max-width: 900px; }
+.section-title em { font-style: italic; color: var(--deep-red); }
+.section-body { font-size: 17px; color: var(--text-soft); max-width: 640px; line-height: 1.6; }
+
+.moat-band { background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg) 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 60px 2rem; position: relative; }
+.moat-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.moat-card { background: var(--bg-paper); padding: 2.5rem 2rem; border-radius: 16px; border: 1px solid var(--border); position: relative; transition: all 0.3s; }
+.moat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lifted); border-color: var(--turmeric); }
+.moat-card-num { font-family: 'Fraunces', serif; font-style: italic; font-size: 13px; color: var(--turmeric-deep); margin-bottom: 1rem; }
+.moat-card-title { display: flex; align-items: baseline; gap: 12px; margin-bottom: 1rem; }
+.moat-card-word { font-family: 'Fraunces', serif; font-size: 36px; font-weight: 500; color: var(--deep-red); line-height: 1; }
+.moat-card-eq { font-family: 'Fraunces', serif; font-style: italic; font-size: 18px; color: var(--text-muted); }
+.moat-card-def { font-size: 15px; color: var(--text-soft); line-height: 1.6; }
+
+.pillars-section { padding: 100px 2rem; }
+.pillars-header { max-width: 1280px; margin: 0 auto 3rem; }
+.pillars-wrap { max-width: 1280px; margin: 0 auto; }
+.pillar-tabs { display: flex; gap: 8px; flex-wrap: wrap; padding: 8px; background: var(--bg-warm); border-radius: 16px 16px 0 0; border: 1px solid var(--border); border-bottom: none; }
+.pillar-tab { flex: 1; min-width: 130px; background: transparent; border: 1px solid transparent; color: var(--text-soft); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; padding: 14px 12px; cursor: pointer; border-radius: 10px; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.pillar-tab:hover { background: var(--bg-paper); color: var(--deep-red); }
+.pillar-tab.active { background: var(--deep-red); color: var(--bg-paper); box-shadow: var(--shadow); }
+.pillar-tab-num { font-family: 'Fraunces', serif; font-style: italic; font-size: 11px; opacity: 0.7; }
+.pillar-tab-name { font-size: 13px; font-weight: 500; line-height: 1.1; text-align: center; }
+.pillar-content { display: none; background: var(--bg-paper); border: 1px solid var(--border); border-radius: 0 0 16px 16px; overflow: hidden; }
+.pillar-content.active { display: grid; grid-template-columns: 1.1fr 1fr; }
+.pillar-left { padding: 3rem; border-right: 1px solid var(--border); }
+.pillar-right { padding: 3rem; background: var(--bg-warm); }
+.pillar-big-num { font-family: 'Fraunces', serif; font-size: 72px; font-weight: 300; color: var(--turmeric); line-height: 1; margin-bottom: 0.5rem; font-style: italic; }
+.pillar-eyebrow { font-family: 'Fraunces', serif; font-style: italic; font-size: 14px; color: var(--turmeric-deep); margin-bottom: 0.5rem; }
+.pillar-title { font-family: 'Fraunces', serif; font-size: 36px; font-weight: 500; color: var(--text); margin-bottom: 1rem; line-height: 1.1; }
+.pillar-body { font-size: 16px; color: var(--text-soft); line-height: 1.65; margin-bottom: 2rem; }
+.pillar-badge { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 12px; border-radius: 16px; margin-bottom: 1.5rem; }
+.badge-free { background: rgba(90,122,63,0.12); color: var(--leaf-deep); border: 1px solid rgba(90,122,63,0.3); }
+.badge-premium { background: rgba(217,137,45,0.12); color: var(--turmeric-deep); border: 1px solid rgba(217,137,45,0.3); }
+.badge-coming { background: rgba(139,42,30,0.08); color: var(--deep-red); border: 1px solid rgba(139,42,30,0.2); }
+[data-theme="dark"] .badge-free { background: rgba(122,157,94,0.18); color: var(--leaf); border-color: rgba(122,157,94,0.4); }
+[data-theme="dark"] .badge-premium { background: rgba(244,199,123,0.18); color: var(--saffron); border-color: rgba(244,199,123,0.4); }
+[data-theme="dark"] .badge-coming { background: rgba(196,74,56,0.18); color: var(--deep-red-light); border-color: rgba(196,74,56,0.4); }
+.pillar-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.feat { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--text-soft); line-height: 1.5; padding: 10px 14px; background: var(--surface); border-radius: 10px; border: 1px solid transparent; cursor: pointer; transition: all 0.2s; }
+.feat:hover { border-color: var(--turmeric); background: var(--bg-paper); transform: translateX(2px); }
+.feat-icon { flex-shrink: 0; width: 22px; height: 22px; background: var(--bg-warm); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--deep-red); font-size: 11px; font-weight: 600; margin-top: 1px; }
+
+.ask-widget { background: var(--bg-paper); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.ask-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; background: var(--bg-warm); }
+.ask-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--leaf); box-shadow: 0 0 0 3px rgba(90,122,63,0.2); }
+.ask-title { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 500; color: var(--text); }
+.ask-subtitle { font-size: 11px; color: var(--text-muted); margin-left: auto; font-style: italic; }
+.ask-body { padding: 1.25rem; }
+.ask-input-wrap { display: flex; gap: 8px; margin-bottom: 14px; }
+.ask-input { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 22px; padding: 10px 16px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; outline: none; transition: border-color 0.2s; }
+.ask-input:focus { border-color: var(--turmeric); }
+.ask-input::placeholder { color: var(--text-muted); }
+.ask-send { background: var(--deep-red); color: var(--bg-paper); border: none; padding: 10px 18px; border-radius: 22px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.ask-send:hover { background: var(--maroon); }
+.ask-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.ask-chip { font-size: 11px; color: var(--text-soft); background: var(--surface); border: 1px solid var(--border); padding: 5px 12px; border-radius: 14px; cursor: pointer; transition: all 0.2s; }
+.ask-chip:hover { border-color: var(--deep-red); color: var(--deep-red); background: var(--bg-warm); }
+.ask-answer { background: var(--surface); border-radius: 10px; padding: 14px; border-left: 3px solid var(--turmeric); }
+.ask-answer-text { font-size: 13px; color: var(--text-soft); line-height: 1.65; margin-bottom: 10px; }
+.ask-cite { font-size: 11px; color: var(--text-muted); display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.cite-tag { background: var(--bg-warm); border: 1px solid var(--border); padding: 3px 9px; border-radius: 12px; color: var(--deep-red); text-decoration: none; font-weight: 500; transition: all 0.2s; }
+.cite-tag:hover { background: var(--deep-red); color: var(--bg-paper); }
+.ask-disclaimer { font-size: 10px; color: var(--text-muted); margin-top: 10px; font-style: italic; line-height: 1.5; }
+
+.swaps-section { padding: 100px 2rem; background: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.swaps-inner { max-width: 1280px; margin: 0 auto; }
+.swaps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 3rem; }
+.swap-card { background: var(--bg-paper); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; cursor: pointer; transition: all 0.25s; position: relative; overflow: hidden; }
+.swap-card:hover { transform: translateY(-4px); border-color: var(--turmeric); box-shadow: var(--shadow-lifted); }
+.swap-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--deep-red), var(--turmeric), var(--leaf)); opacity: 0; transition: opacity 0.2s; }
+.swap-card:hover::before { opacity: 1; }
+.swap-from { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-muted); text-decoration: line-through; margin-bottom: 8px; }
+.swap-arrow-wrap { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+.swap-arrow-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--turmeric), transparent); }
+.swap-arrow-text { font-family: 'Fraunces', serif; font-style: italic; font-size: 13px; color: var(--turmeric-deep); }
+.swap-to { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; color: var(--deep-red); margin-bottom: 8px; line-height: 1.1; }
+.swap-tradition { display: inline-block; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--leaf-deep); background: rgba(90,122,63,0.1); padding: 3px 10px; border-radius: 10px; font-weight: 500; }
+[data-theme="dark"] .swap-tradition { background: rgba(122,157,94,0.18); color: var(--leaf); }
+.swap-click-hint { font-size: 11px; color: var(--text-muted); margin-top: 10px; font-style: italic; }
+
+.modal-overlay { position: fixed; inset: 0; background: rgba(42,24,16,0.6); backdrop-filter: blur(6px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 2rem; }
+.modal-overlay.show { display: flex; }
+.modal { background: var(--bg-paper); border-radius: 20px; max-width: 600px; width: 100%; max-height: 86vh; overflow-y: auto; padding: 2.5rem; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3); border: 1px solid var(--border); }
+.modal-close { position: absolute; top: 1rem; right: 1rem; width: 36px; height: 36px; border-radius: 50%; background: var(--bg-warm); border: none; cursor: pointer; font-size: 18px; color: var(--text); display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.modal-close:hover { background: var(--deep-red); color: var(--bg-paper); transform: rotate(90deg); }
+.modal-eyebrow { font-family: 'Fraunces', serif; font-style: italic; font-size: 14px; color: var(--turmeric-deep); margin-bottom: 0.5rem; }
+.modal-title { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 500; color: var(--text); margin-bottom: 1.5rem; line-height: 1.1; }
+.modal-section { margin-bottom: 1.5rem; }
+.modal-section-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--turmeric-deep); font-weight: 600; margin-bottom: 0.5rem; }
+.modal-section-body { font-size: 15px; color: var(--text-soft); line-height: 1.65; }
+.modal-tradition-tag { display: inline-block; background: var(--bg-warm); color: var(--deep-red); font-size: 12px; font-weight: 500; padding: 6px 14px; border-radius: 14px; margin-bottom: 1rem; border: 1px solid var(--border); }
+.modal-evidence { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.75rem; }
+.modal-evidence a { font-size: 12px; background: var(--surface); color: var(--deep-red); padding: 6px 12px; border-radius: 12px; text-decoration: none; border: 1px solid var(--border); transition: all 0.2s; }
+.modal-evidence a:hover { background: var(--deep-red); color: var(--bg-paper); }
+
+.ancient-section { padding: 100px 2rem; max-width: 1280px; margin: 0 auto; }
+.traditions-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-top: 3rem; }
+.tradition-card { background: var(--bg-paper); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; cursor: pointer; transition: all 0.25s; position: relative; overflow: hidden; }
+.tradition-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lifted); border-color: var(--turmeric); }
+.tradition-name { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; color: var(--deep-red); margin-bottom: 4px; }
+.tradition-origin { font-family: 'Fraunces', serif; font-style: italic; font-size: 12px; color: var(--text-muted); margin-bottom: 0.75rem; }
+.tradition-lens { font-size: 13px; color: var(--text-soft); line-height: 1.55; margin-bottom: 1rem; }
+.tradition-concepts { display: flex; flex-wrap: wrap; gap: 5px; }
+.concept-tag { font-size: 10px; padding: 3px 8px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); }
+
+.spine-section { background: var(--bg-warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 100px 2rem; }
+.spine-inner { max-width: 1280px; margin: 0 auto; }
+.spine-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-top: 3rem; }
+.spine-card { background: var(--bg-paper); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem 1.25rem; text-align: center; transition: all 0.25s; cursor: pointer; }
+.spine-card:hover { transform: translateY(-4px); border-color: var(--turmeric); box-shadow: var(--shadow-lifted); }
+.spine-num { font-family: 'Fraunces', serif; font-style: italic; font-size: 36px; font-weight: 400; color: var(--turmeric); margin-bottom: 0.75rem; line-height: 1; }
+.spine-principle { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 500; color: var(--text); line-height: 1.3; margin-bottom: 1rem; }
+.spine-traditions { font-size: 11px; color: var(--text-muted); line-height: 1.7; font-style: italic; }
+
+.pricing-section { padding: 100px 2rem; max-width: 1280px; margin: 0 auto; }
+.pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+.price-card { background: var(--bg-paper); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); position: relative; transition: all 0.25s; }
+.price-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lifted); }
+.price-card.featured { border: 2px solid var(--deep-red); background: linear-gradient(180deg, var(--bg-paper) 0%, var(--bg-warm) 100%); }
+.price-tier { display: inline-block; font-family: 'Fraunces', serif; font-style: italic; font-size: 14px; color: var(--turmeric-deep); margin-bottom: 1rem; }
+.price-tier.featured-badge { background: var(--deep-red); color: var(--bg-paper); padding: 4px 14px; border-radius: 12px; font-style: normal; font-weight: 500; }
+.price-amount { font-family: 'Fraunces', serif; font-size: 56px; font-weight: 400; color: var(--text); margin-bottom: 0.25rem; line-height: 1; }
+.price-amount span { font-size: 18px; color: var(--text-muted); font-style: italic; }
+.price-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 1.75rem; font-style: italic; }
+.price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.price-features li { font-size: 14px; color: var(--text-soft); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+.check { flex-shrink: 0; width: 20px; height: 20px; background: rgba(90,122,63,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--leaf-deep); font-size: 11px; font-weight: 700; margin-top: 1px; }
+[data-theme="dark"] .check { background: rgba(122,157,94,0.25); color: var(--leaf); }
+
+.waitlist-band { background: var(--deep-red); background-image: radial-gradient(circle at 20% 30%, var(--maroon) 0%, var(--deep-red) 70%); padding: 80px 2rem; text-align: center; color: var(--bg-paper); margin: 60px auto; border-radius: 20px; max-width: 1280px; position: relative; overflow: hidden; }
+.waitlist-band::before { content: ''; position: absolute; top: -50%; right: -10%; width: 60%; height: 200%; background: radial-gradient(circle, var(--turmeric) 0%, transparent 50%); opacity: 0.15; }
+.waitlist-band-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+.waitlist-band h2 { font-family: 'Fraunces', serif; font-size: clamp(32px, 4.5vw, 48px); font-weight: 400; margin-bottom: 1rem; line-height: 1.1; }
+.waitlist-band h2 em { font-style: italic; color: var(--turmeric-light); }
+.waitlist-band p { font-size: 17px; margin-bottom: 2rem; opacity: 0.92; line-height: 1.5; }
+.waitlist-band .btn-primary { background: var(--bg-paper); color: var(--deep-red); font-size: 15px; padding: 15px 32px; }
+.waitlist-band .btn-primary:hover { background: var(--turmeric-light); color: var(--maroon); }
+
+.disclaimers-section { padding: 80px 2rem; max-width: 1280px; margin: 0 auto; }
+.disclaimers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+.disclaimer-card { background: var(--bg-paper); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+.disclaimer-icon { width: 36px; height: 36px; background: var(--bg-warm); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: var(--deep-red); font-size: 16px; font-weight: 600; }
+.disclaimer-card-title { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; color: var(--text); margin-bottom: 0.5rem; }
+.disclaimer-card-text { font-size: 13px; color: var(--text-soft); line-height: 1.6; }
+
+footer { background: var(--bg-warm); border-top: 1px solid var(--border); padding: 60px 2rem 30px; }
+.footer-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+.footer-brand { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 500; color: var(--deep-red); margin-bottom: 6px; }
+.footer-tagline { font-family: 'Fraunces', serif; font-style: italic; font-size: 14px; color: var(--text-muted); margin-bottom: 1rem; }
+.footer-desc { font-size: 13px; color: var(--text-soft); line-height: 1.55; max-width: 280px; }
+.footer-col-title { font-family: 'Fraunces', serif; font-style: italic; font-size: 14px; color: var(--turmeric-deep); margin-bottom: 1rem; }
+.footer-col-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-col-list a { font-size: 13px; color: var(--text-soft); text-decoration: none; transition: color 0.2s; }
+.footer-col-list a:hover { color: var(--deep-red); }
+.footer-col-list .contact-line { font-size: 13px; color: var(--text-soft); display: flex; align-items: center; gap: 8px; }
+.contact-icon { width: 18px; height: 18px; flex-shrink: 0; background: var(--bg-paper); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--deep-red); }
+.footer-legal { max-width: 1280px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; font-size: 12px; color: var(--text-muted); }
+.footer-legal-italic { font-style: italic; }
+
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 980px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .moat-inner { grid-template-columns: 1fr; }
+  .pillar-content.active { grid-template-columns: 1fr; }
+  .pillar-left { border-right: none; border-bottom: 1px solid var(--border); }
+  .swaps-grid, .traditions-grid, .spine-grid { grid-template-columns: 1fr 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .disclaimers-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  section { padding: 60px 1.25rem; }
+  .hero { padding: 100px 1.25rem 40px; }
+  .swaps-grid, .traditions-grid, .spine-grid, .footer-inner, .disclaimers-grid, .hero-moat-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<nav>
+  <a class="nav-logo" href="#top">
+    <svg class="logo-mark" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="#8B2A1E" stroke-width="1.5"/><path d="M20 8 C 14 14, 14 26, 20 32 C 26 26, 26 14, 20 8 Z" fill="#D9892D" opacity="0.85"/><circle cx="20" cy="20" r="3" fill="#8B2A1E"/></svg>
+    Aahaar<span class="tagline">· know your food</span>
+    <span class="beta-badge" title="This is a working Beta — Proof of Concept">Beta · PoC</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#pillars">8 Pillars</a></li>
+    <li><a href="#ancient">Ancient Sciences</a></li>
+    <li><a href="#swaps">Natural Swaps</a></li>
+    <li><a href="#spine">The Spine</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+  <div class="nav-tools">
+    <select class="lang-select" id="langSelect" onchange="changeLanguage()">
+      <option value="en">EN · English</option>
+      <option value="hi">हि · हिन्दी</option>
+      <option value="bn">বা · বাংলা</option>
+      <option value="ta">த · தமிழ்</option>
+      <option value="te">తె · తెలుగు</option>
+      <option value="pa">ਪੰ · ਪੰਜਾਬੀ</option>
+      <option value="ur">اُر · اُردُو</option>
+      <option value="zh">中 · 中文</option>
+      <option value="es">ES · Español</option>
+      <option value="ar">عر · العربية</option>
+      <option value="pt">PT · Português</option>
+      <option value="ru">РУ · Русский</option>
+      <option value="ja">日 · 日本語</option>
+      <option value="fr">FR · Français</option>
+      <option value="de">DE · Deutsch</option>
+    </select>
+    <button class="tool-btn" onclick="toggleTheme()" title="Toggle light/dark" id="themeBtn">☾</button>
+    <button class="nav-cta" onclick="openWaitlist()">Join Waitlist</button>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-visual">
+      <svg class="hero-thali" viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg">
+        <title>Aahaar — A world thali</title>
+        <desc>A hand-painted watercolor world thali with seven katoris holding food from India, China, Japan, the Mediterranean, Mexico, the Middle East and Africa.</desc>
+        <defs>
+          <radialGradient id="parchment" cx="50%" cy="50%" r="65%"><stop offset="0%" stop-color="#FBF6EC"/><stop offset="60%" stop-color="#F5EDD9"/><stop offset="100%" stop-color="#EBD8B0"/></radialGradient>
+          <radialGradient id="thaliSilver" cx="40%" cy="35%" r="70%"><stop offset="0%" stop-color="#FFFAEF"/><stop offset="55%" stop-color="#E8DCBE"/><stop offset="100%" stop-color="#A88862"/></radialGradient>
+          <radialGradient id="thaliInner" cx="45%" cy="40%" r="55%"><stop offset="0%" stop-color="#FFFEF8"/><stop offset="100%" stop-color="#D9C195"/></radialGradient>
+          <radialGradient id="bowlIndia" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#E8A33B"/><stop offset="100%" stop-color="#8B4A14"/></radialGradient>
+          <radialGradient id="bowlChina" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#F4C77B"/><stop offset="100%" stop-color="#B36A14"/></radialGradient>
+          <radialGradient id="bowlJapan" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#FCEFD9"/><stop offset="100%" stop-color="#8B6F55"/></radialGradient>
+          <radialGradient id="bowlMed" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#9FB87E"/><stop offset="100%" stop-color="#3D5628"/></radialGradient>
+          <radialGradient id="bowlMexico" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#E36B57"/><stop offset="100%" stop-color="#5C1410"/></radialGradient>
+          <radialGradient id="bowlMiddleEast" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#D9892D"/><stop offset="100%" stop-color="#5C1410"/></radialGradient>
+          <radialGradient id="bowlAfrica" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#C44A38"/><stop offset="100%" stop-color="#3D1810"/></radialGradient>
+          <filter id="watercolor" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="4"/></filter>
+          <filter id="paperGrain" x="0%" y="0%" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7"/><feColorMatrix values="0 0 0 0 0.85 0 0 0 0 0.75 0 0 0 0 0.55 0 0 0 0.18 0"/></filter>
+        </defs>
+        <rect x="0" y="0" width="680" height="680" fill="url(#parchment)" rx="20"/>
+        <rect x="0" y="0" width="680" height="680" fill="transparent" filter="url(#paperGrain)" opacity="0.6" rx="20"/>
+        <g opacity="0.25" fill="none" stroke="#8B6F55" stroke-width="0.5"><circle cx="120" cy="100" r="18"/><circle cx="580" cy="120" r="22"/><circle cx="80" cy="560" r="20"/><circle cx="600" cy="580" r="16"/><circle cx="340" cy="60" r="14"/><circle cx="50" cy="340" r="12"/><circle cx="630" cy="340" r="14"/><circle cx="340" cy="630" r="16"/></g>
+        <g opacity="0.35" fill="#D9892D"><ellipse cx="100" cy="90" rx="3" ry="1.5" transform="rotate(30 100 90)"/><ellipse cx="125" cy="105" rx="3" ry="1.5" transform="rotate(60 125 105)"/><ellipse cx="580" cy="115" rx="3" ry="1.5" transform="rotate(15 580 115)"/><ellipse cx="60" cy="540" rx="3" ry="1.5" transform="rotate(45 60 540)"/><ellipse cx="610" cy="590" rx="3" ry="1.5" transform="rotate(70 610 590)"/><ellipse cx="330" cy="50" rx="3" ry="1.5" transform="rotate(20 330 50)"/></g>
+        <ellipse cx="345" cy="350" rx="270" ry="40" fill="#8B6F55" opacity="0.18"/>
+        <circle cx="340" cy="340" r="265" fill="url(#thaliSilver)" filter="url(#watercolor)" opacity="0.95"/>
+        <circle cx="340" cy="340" r="265" fill="none" stroke="#8B6F55" stroke-width="2" opacity="0.4"/>
+        <circle cx="340" cy="340" r="248" fill="none" stroke="#A88862" stroke-width="1" opacity="0.5"/>
+        <circle cx="340" cy="340" r="238" fill="url(#thaliInner)" opacity="0.9"/>
+        <circle cx="340" cy="340" r="238" fill="none" stroke="#A88862" stroke-width="0.5" opacity="0.6"/>
+        <g opacity="0.4"><path d="M 200 200 Q 220 180 245 200" fill="none" stroke="#FFFEF8" stroke-width="2" stroke-linecap="round"/><path d="M 460 195 Q 485 215 470 240" fill="none" stroke="#FFFEF8" stroke-width="2" stroke-linecap="round"/><path d="M 180 460 Q 200 480 220 460" fill="none" stroke="#FFFEF8" stroke-width="1.5" stroke-linecap="round"/></g>
+        <g transform="translate(340, 165)"><circle cx="0" cy="0" r="58" fill="url(#bowlIndia)" filter="url(#watercolor)" opacity="0.95"/><circle cx="0" cy="0" r="58" fill="none" stroke="#5C1410" stroke-width="1" opacity="0.5"/><ellipse cx="-15" cy="-18" rx="22" ry="10" fill="#FFFEF8" opacity="0.3"/><circle cx="-12" cy="0" r="22" fill="#B36A14" opacity="0.85"/><circle cx="-12" cy="0" r="22" fill="#8B4A14" opacity="0.3"/><ellipse cx="-12" cy="-5" rx="8" ry="3" fill="#F4C77B" opacity="0.7"/><ellipse cx="18" cy="8" rx="16" ry="10" fill="#FBF6EC" opacity="0.95"/><ellipse cx="18" cy="8" rx="16" ry="10" fill="none" stroke="#A88862" stroke-width="0.5" opacity="0.6"/><ellipse cx="18" cy="6" rx="10" ry="5" fill="#E8DCBE" opacity="0.7"/><circle cx="14" cy="-15" r="3" fill="#5A7A3F" opacity="0.85"/><circle cx="22" cy="-16" r="3" fill="#5A7A3F" opacity="0.85"/><circle cx="18" cy="-11" r="3" fill="#5A7A3F" opacity="0.85"/></g>
+        <g transform="translate(515, 240)"><circle cx="0" cy="0" r="52" fill="url(#bowlChina)" filter="url(#watercolor)" opacity="0.95"/><circle cx="0" cy="0" r="52" fill="none" stroke="#8B4A14" stroke-width="1" opacity="0.5"/><ellipse cx="-12" cy="-15" rx="18" ry="8" fill="#FFFEF8" opacity="0.3"/><ellipse cx="-14" cy="-6" rx="11" ry="14" fill="#FBF6EC" opacity="0.95"/><ellipse cx="-14" cy="-6" rx="11" ry="14" fill="none" stroke="#8B6F55" stroke-width="0.5" opacity="0.7"/><path d="M -23 -8 Q -14 -16 -5 -8" fill="none" stroke="#A88862" stroke-width="0.8" opacity="0.7"/><path d="M -23 -2 Q -14 -10 -5 -2" fill="none" stroke="#A88862" stroke-width="0.8" opacity="0.7"/><ellipse cx="12" cy="-2" rx="11" ry="14" fill="#FBF6EC" opacity="0.95"/><ellipse cx="12" cy="-2" rx="11" ry="14" fill="none" stroke="#8B6F55" stroke-width="0.5" opacity="0.7"/><path d="M 3 -4 Q 12 -12 21 -4" fill="none" stroke="#A88862" stroke-width="0.8" opacity="0.7"/><path d="M 3 2 Q 12 -6 21 2" fill="none" stroke="#A88862" stroke-width="0.8" opacity="0.7"/><ellipse cx="-2" cy="14" rx="11" ry="14" fill="#FBF6EC" opacity="0.95"/><ellipse cx="-2" cy="14" rx="11" ry="14" fill="none" stroke="#8B6F55" stroke-width="0.5" opacity="0.7"/><path d="M -11 12 Q -2 4 7 12" fill="none" stroke="#A88862" stroke-width="0.8" opacity="0.7"/></g>
+        <g transform="translate(515, 440)"><circle cx="0" cy="0" r="52" fill="url(#bowlJapan)" filter="url(#watercolor)" opacity="0.95"/><circle cx="0" cy="0" r="52" fill="none" stroke="#8B6F55" stroke-width="1" opacity="0.5"/><ellipse cx="-12" cy="-15" rx="18" ry="8" fill="#FFFEF8" opacity="0.3"/><g transform="translate(-15, -2)"><ellipse cx="0" cy="0" rx="12" ry="10" fill="#FBF6EC" opacity="0.95"/><rect x="-10" y="-4" width="20" height="8" fill="#E36B57" opacity="0.75"/><rect x="-10" y="-4" width="20" height="8" fill="none" stroke="#8B2A1E" stroke-width="0.4" opacity="0.5"/><rect x="-10" y="-4" width="20" height="2" fill="#C44A38" opacity="0.6"/></g><g transform="translate(15, 2)"><ellipse cx="0" cy="0" rx="12" ry="10" fill="#FBF6EC" opacity="0.95"/><ellipse cx="-4" cy="-3" rx="2.5" ry="1.5" fill="#5A7A3F" opacity="0.85"/><ellipse cx="2" cy="-1" rx="2.5" ry="1.5" fill="#5A7A3F" opacity="0.85"/><ellipse cx="6" cy="2" rx="2.5" ry="1.5" fill="#5A7A3F" opacity="0.85"/><ellipse cx="0" cy="3" rx="2.5" ry="1.5" fill="#5A7A3F" opacity="0.85"/><ellipse cx="-3" cy="0" rx="1" ry="0.8" fill="#3D5628"/><ellipse cx="3" cy="-2" rx="1" ry="0.8" fill="#3D5628"/></g><rect x="-8" y="16" width="3" height="14" fill="#D9892D" opacity="0.85" transform="rotate(-15 -7 23)"/><rect x="2" y="16" width="3" height="14" fill="#D9892D" opacity="0.85" transform="rotate(-10 4 23)"/></g>
+        <g transform="translate(340, 515)"><circle cx="0" cy="0" r="58" fill="url(#bowlMed)" filter="url(#watercolor)" opacity="0.95"/><circle cx="0" cy="0" r="58" fill="none" stroke="#3D5628" stroke-width="1" opacity="0.5"/><ellipse cx="-15" cy="-18" rx="22" ry="10" fill="#FFFEF8" opacity="0.3"/><circle cx="-15" cy="-2" r="20" fill="#EBD8B0" opacity="0.95"/><circle cx="-15" cy="-2" r="20" fill="none" stroke="#A88862" stroke-width="0.5" opacity="0.7"/><circle cx="-18" cy="-5" r="6" fill="#D9892D" opacity="0.6"/><ellipse cx="-15" cy="-8" rx="3" ry="1.5" fill="#5A7A3F" opacity="0.85"/><ellipse cx="-12" cy="-3" rx="3" ry="1.5" fill="#5A7A3F" opacity="0.85"/><ellipse cx="-17" cy="0" rx="3" ry="1.5" fill="#5A7A3F" opacity="0.85"/><ellipse cx="14" cy="-8" rx="6" ry="5" fill="#3D5628" opacity="0.9"/><ellipse cx="22" cy="-3" rx="6" ry="5" fill="#3D5628" opacity="0.9"/><ellipse cx="18" cy="6" rx="6" ry="5" fill="#3D5628" opacity="0.9"/><ellipse cx="10" cy="2" rx="6" ry="5" fill="#5A7A3F" opacity="0.9"/><ellipse cx="13" cy="-10" rx="2" ry="1.5" fill="#9FB87E" opacity="0.7"/><ellipse cx="21" cy="-5" rx="2" ry="1.5" fill="#9FB87E" opacity="0.7"/></g>
+        <g transform="translate(165, 440)"><circle cx="0" cy="0" r="52" fill="url(#bowlMexico)" filter="url(#watercolor)" opacity="0.95"/><circle cx="0" cy="0" r="52" fill="none" stroke="#5C1410" stroke-width="1" opacity="0.5"/><ellipse cx="-12" cy="-15" rx="18" ry="8" fill="#FFFEF8" opacity="0.3"/><ellipse cx="-12" cy="0" rx="16" ry="14" fill="#5A7A3F" opacity="0.95"/><ellipse cx="-12" cy="-3" rx="10" ry="6" fill="#9FB87E" opacity="0.8"/><circle cx="-16" cy="-2" r="2" fill="#D9892D" opacity="0.85"/><circle cx="-9" cy="2" r="2" fill="#D9892D" opacity="0.85"/><circle cx="-13" cy="4" r="1.5" fill="#FBF6EC"/><ellipse cx="14" cy="2" rx="14" ry="11" fill="#F4C77B" opacity="0.95"/><ellipse cx="14" cy="2" rx="14" ry="11" fill="none" stroke="#8B4A14" stroke-width="0.5" opacity="0.7"/><circle cx="10" cy="-1" r="1.5" fill="#8B4A14" opacity="0.5"/><circle cx="17" cy="4" r="1.5" fill="#8B4A14" opacity="0.5"/><circle cx="13" cy="5" r="1.2" fill="#8B4A14" opacity="0.5"/><ellipse cx="14" cy="-8" rx="2.5" ry="1" fill="#8B4A14" opacity="0.4"/></g>
+        <g transform="translate(165, 240)"><circle cx="0" cy="0" r="52" fill="url(#bowlMiddleEast)" filter="url(#watercolor)" opacity="0.95"/><circle cx="0" cy="0" r="52" fill="none" stroke="#5C1410" stroke-width="1" opacity="0.5"/><ellipse cx="-12" cy="-15" rx="18" ry="8" fill="#FFFEF8" opacity="0.3"/><ellipse cx="-12" cy="0" rx="16" ry="14" fill="#F4C77B" opacity="0.95"/><g opacity="0.85"><circle cx="-18" cy="-3" r="1" fill="#E8A33B"/><circle cx="-12" cy="-5" r="1" fill="#E8A33B"/><circle cx="-6" cy="-2" r="1" fill="#E8A33B"/><circle cx="-15" cy="2" r="1" fill="#E8A33B"/><circle cx="-9" cy="4" r="1" fill="#E8A33B"/><circle cx="-18" cy="6" r="1" fill="#E8A33B"/><circle cx="-12" cy="0" r="0.8" fill="#D9892D"/><circle cx="-15" cy="-2" r="0.8" fill="#D9892D"/><path d="M -16 -1 Q -14 0 -12 -1 Q -10 0 -8 -1" stroke="#C44A38" stroke-width="0.6" fill="none" opacity="0.7"/><path d="M -14 3 Q -12 4 -10 3" stroke="#C44A38" stroke-width="0.6" fill="none" opacity="0.7"/></g><ellipse cx="15" cy="-5" rx="6" ry="9" fill="#5C1410" opacity="0.9"/><ellipse cx="22" cy="0" rx="6" ry="9" fill="#3D1810" opacity="0.9"/><ellipse cx="13" cy="6" rx="6" ry="9" fill="#5C1410" opacity="0.9"/><ellipse cx="14" cy="-9" rx="2" ry="1" fill="#8B4A14" opacity="0.5"/><ellipse cx="21" cy="-4" rx="2" ry="1" fill="#8B4A14" opacity="0.5"/></g>
+        <g transform="translate(340, 340)"><circle cx="0" cy="0" r="65" fill="url(#bowlAfrica)" filter="url(#watercolor)" opacity="0.95"/><circle cx="0" cy="0" r="65" fill="none" stroke="#3D1810" stroke-width="1.2" opacity="0.5"/><ellipse cx="-18" cy="-20" rx="25" ry="12" fill="#FFFEF8" opacity="0.3"/><ellipse cx="0" cy="0" rx="45" ry="38" fill="#E8A33B" opacity="0.9"/><g opacity="0.9"><ellipse cx="-25" cy="-15" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="-15" cy="-20" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="-5" cy="-18" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="8" cy="-22" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="20" cy="-15" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="-30" cy="-5" rx="2" ry="1.2" fill="#B36A14"/><ellipse cx="-20" cy="-8" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="-10" cy="-10" rx="2" ry="1.2" fill="#B36A14"/><ellipse cx="0" cy="-8" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="12" cy="-5" rx="2" ry="1.2" fill="#B36A14"/><ellipse cx="24" cy="-3" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="-32" cy="5" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="-22" cy="2" rx="2" ry="1.2" fill="#B36A14"/><ellipse cx="-12" cy="3" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="-2" cy="0" rx="2" ry="1.2" fill="#B36A14"/><ellipse cx="10" cy="5" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="22" cy="8" rx="2" ry="1.2" fill="#B36A14"/><ellipse cx="32" cy="2" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="-28" cy="14" rx="2" ry="1.2" fill="#B36A14"/><ellipse cx="-18" cy="13" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="-8" cy="15" rx="2" ry="1.2" fill="#B36A14"/><ellipse cx="4" cy="13" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="16" cy="14" rx="2" ry="1.2" fill="#B36A14"/><ellipse cx="28" cy="13" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="-20" cy="22" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="-8" cy="24" rx="2" ry="1.2" fill="#B36A14"/><ellipse cx="4" cy="22" rx="2" ry="1.2" fill="#D9892D"/><ellipse cx="16" cy="24" rx="2" ry="1.2" fill="#B36A14"/></g><circle cx="0" cy="0" r="9" fill="#C44A38" opacity="0.7"/><ellipse cx="-2" cy="-1" rx="4" ry="2" fill="#E36B57" opacity="0.85"/><g opacity="0.85"><ellipse cx="-12" cy="8" rx="3" ry="2" fill="#5A7A3F"/><ellipse cx="14" cy="-10" rx="3" ry="2" fill="#5A7A3F"/><ellipse cx="18" cy="14" rx="3" ry="2" fill="#5A7A3F"/></g></g>
+        <g opacity="0.5"><ellipse cx="340" cy="190" rx="8" ry="3" fill="#FFFEF8" opacity="0.4"/><path d="M 332 188 Q 335 178 332 168" fill="none" stroke="#FFFEF8" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><path d="M 340 188 Q 343 175 340 162" fill="none" stroke="#FFFEF8" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/><path d="M 348 188 Q 351 178 348 168" fill="none" stroke="#FFFEF8" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><path d="M 510 215 Q 513 205 510 195" fill="none" stroke="#FFFEF8" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><path d="M 518 215 Q 521 202 518 190" fill="none" stroke="#FFFEF8" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/><path d="M 335 295 Q 338 280 335 263" fill="none" stroke="#FFFEF8" stroke-width="1.5" stroke-linecap="round" opacity="0.55"/><path d="M 343 295 Q 346 278 343 260" fill="none" stroke="#FFFEF8" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/></g>
+        <g opacity="0.45"><ellipse cx="80" cy="430" rx="25" ry="15" transform="rotate(-25 80 430)" fill="#5A7A3F"/><ellipse cx="78" cy="427" rx="20" ry="11" transform="rotate(-25 78 427)" fill="#9FB87E"/><path d="M 65 425 L 95 437" stroke="#3D5628" stroke-width="0.4"/></g>
+        <g opacity="0.4"><ellipse cx="600" cy="430" rx="22" ry="13" transform="rotate(20 600 430)" fill="#D9892D"/><ellipse cx="598" cy="427" rx="18" ry="10" transform="rotate(20 598 427)" fill="#F4C77B"/></g>
+        <g opacity="0.3"><ellipse cx="600" cy="180" rx="14" ry="8" transform="rotate(-15 600 180)" fill="#5A7A3F"/><ellipse cx="598" cy="178" rx="11" ry="6" transform="rotate(-15 598 178)" fill="#9FB87E"/></g>
+        <g opacity="0.3"><ellipse cx="70" cy="180" rx="14" ry="8" transform="rotate(15 70 180)" fill="#C44A38"/><ellipse cx="68" cy="178" rx="11" ry="6" transform="rotate(15 68 178)" fill="#E36B57"/></g>
+        <g opacity="0.25" fill="none" stroke="#8B6F55" stroke-width="0.4"><path d="M 30 320 Q 50 340 30 360"/><path d="M 30 380 Q 50 400 30 420"/><path d="M 650 320 Q 630 340 650 360"/><path d="M 650 380 Q 630 400 650 420"/></g>
+      </svg>
+      <div class="hero-thali-labels">
+        <span class="thali-label thali-label-1">India · दाल</span>
+        <span class="thali-label thali-label-2">China · 饺子</span>
+        <span class="thali-label thali-label-3">Japan · 寿司</span>
+        <span class="thali-label thali-label-4">Mediterranean</span>
+        <span class="thali-label thali-label-5">Mexico</span>
+        <span class="thali-label thali-label-6">Middle East</span>
+      </div>
+      <div class="hero-thali-caption">a world thali · seven traditions · one plate</div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-tag">Food · Diet · Nutrition — three different things</div>
+      <h1>Know your food.<br><em>Heal from <span class="underline">within.</span></em></h1>
+      <p class="hero-sub">Aahaar decodes what you eat, what you are missing, and what to swap — using your body, your region, and 5,000 years of validated ancestral science. Plus modern evidence on every claim.</p>
+      <div class="hero-ask">
+        <div class="hero-ask-head">
+          <div class="hero-ask-dot"></div>
+          <div class="hero-ask-title">Ask Aahaar</div>
+          <span class="hero-ask-beta" title="Working preview · Proof of Concept">Beta · PoC</span>
+        </div>
+        <div class="hero-ask-input-row">
+          <input class="hero-ask-input" type="text" placeholder="Why do I get bloated after beans?" id="heroAskInput" onkeydown="if(event.key==='Enter') heroShowAnswer()">
+          <button class="hero-ask-send" onclick="heroShowAnswer()">Ask →</button>
+        </div>
+        <div class="hero-ask-chips">
+          <span class="hero-ask-chip" onclick="heroFillAsk('Why do I get H. pylori?')">H. pylori</span>
+          <span class="hero-ask-chip" onclick="heroFillAsk('What blocks iron absorption?')">Iron block</span>
+          <span class="hero-ask-chip" onclick="heroFillAsk('How does Agni relate to digestion?')">Agni &amp; digestion</span>
+          <span class="hero-ask-chip" onclick="heroFillAsk('What is gut transit time?')">Gut transit</span>
+        </div>
+        <div class="hero-ask-answer">
+          <div class="hero-ask-answer-text" id="heroAskAnswerText">Beans contain oligosaccharides — complex sugars human enzymes cannot break down. They reach the large intestine intact, where gut bacteria ferment them, producing hydrogen, carbon dioxide and methane gas. Soaking beans overnight and discarding the water removes a significant portion of these sugars — which is why traditional dal preparation across India soaks pulses for hours.</div>
+          <div class="hero-ask-cite">
+            <span>Sources:</span>
+            <a href="https://www.niddk.nih.gov" target="_blank" rel="noopener">NIH/NIDDK</a>
+            <a href="https://nutritionsource.hsph.harvard.edu" target="_blank" rel="noopener">Harvard T.H. Chan</a>
+            <a href="https://www.nin.res.in" target="_blank" rel="noopener">ICMR-NIN</a>
+          </div>
+        </div>
+        <p class="hero-ask-note">Beta · 5 free queries / day · educational only · not medical advice. Sources verified, claims cited inline.</p>
+      </div>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="openWaitlist()">Get Early Access · Free →</button>
+        <a href="#pillars" class="btn-secondary">Explore the 8 Pillars</a>
+      </div>
+      <p class="waitlist-note">Waitlist open now · <strong>50% off</strong> first 12 premium queries when we launch · No credit card</p>
+    </div>
+  </div>
+</section>
+
+<section class="moat-band" style="max-width: 100%; padding: 80px 2rem;">
+  <div class="moat-inner">
+    <div class="moat-card reveal">
+      <div class="moat-card-num">i.</div>
+      <div class="moat-card-title"><div class="moat-card-word">Food</div><div class="moat-card-eq">= the WHAT</div></div>
+      <p class="moat-card-def">The items on your plate. Their properties, their nutrients, their traditional uses across Ayurveda, TCM, Unani, and modern science. Each food carries a full intelligence profile — not just calories.</p>
+    </div>
+    <div class="moat-card reveal">
+      <div class="moat-card-num">ii.</div>
+      <div class="moat-card-title"><div class="moat-card-word">Diet</div><div class="moat-card-eq">= the HABIT</div></div>
+      <p class="moat-card-def">When you eat, how you eat, the sequence of your meals. The ancient science of the eating act — drawn from Dinacharya, the Vedas, and the eating traditions of every culture. This is what no app combines.</p>
+    </div>
+    <div class="moat-card reveal">
+      <div class="moat-card-num">iii.</div>
+      <div class="moat-card-title"><div class="moat-card-word">Nutrition</div><div class="moat-card-eq">= the PROCESS</div></div>
+      <p class="moat-card-def">What your body does with what you eat. From vitamins and minerals up through hormones and the new peptide frontier. The body's internal economy — mapped, explained, and sourced.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pillars-section" id="pillars">
+  <div class="pillars-header reveal">
+    <div class="section-label">The 8 Pillars · everything clickable</div>
+    <h2 class="section-title">Everything your food intelligence <em>platform needs.</em></h2>
+    <p class="section-body">Eight structural pillars. Confirmed against a structural scan of 25+ nutrition apps — no competitor separates all eight at this level. Click any tab. Click any item.</p>
+  </div>
+  <div class="pillars-wrap">
+    <div class="pillar-tabs">
+      <button class="pillar-tab active" onclick="showPillar('body',this)"><span class="pillar-tab-num">01</span><span class="pillar-tab-name">Know Your Body</span></button>
+      <button class="pillar-tab" onclick="showPillar('food',this)"><span class="pillar-tab-num">02</span><span class="pillar-tab-name">Food</span></button>
+      <button class="pillar-tab" onclick="showPillar('nutrition',this)"><span class="pillar-tab-num">03</span><span class="pillar-tab-name">Nutrition</span></button>
+      <button class="pillar-tab" onclick="showPillar('diet',this)"><span class="pillar-tab-num">04</span><span class="pillar-tab-name">Diet</span></button>
+      <button class="pillar-tab" onclick="showPillar('regional',this)"><span class="pillar-tab-num">05</span><span class="pillar-tab-name">Regional</span></button>
+      <button class="pillar-tab" onclick="showPillar('swap',this)"><span class="pillar-tab-num">06</span><span class="pillar-tab-name">Natural Swaps</span></button>
+      <button class="pillar-tab" onclick="showPillar('organise',this)"><span class="pillar-tab-num">07</span><span class="pillar-tab-name">Organise</span></button>
+      <button class="pillar-tab" onclick="showPillar('ancient',this)"><span class="pillar-tab-num">08</span><span class="pillar-tab-name">Ancient Sciences</span></button>
+    </div>
+
+    <div class="pillar-content active" id="p-body">
+      <div class="pillar-left">
+        <div class="pillar-big-num">01</div>
+        <div class="pillar-eyebrow">Pillar one</div>
+        <div class="pillar-title">You, first.</div>
+        <p class="pillar-body">Before any recommendation, Aahaar builds a picture of you. Your deficiency profile. Your body constitution across traditions. Your metabolic baseline. The 3-minute questionnaire is the entry wedge — no login, no friction, immediate utility. Everything else flows from this.</p>
+        <span class="pillar-badge badge-free">● Always Free</span>
+        <ul class="pillar-features">
+          <li class="feat" onclick="openDetail('body-quiz')"><div class="feat-icon">→</div><div>3-minute deficiency screening — answer 15 questions, get your nutrient gap map</div></li>
+          <li class="feat" onclick="openDetail('body-dosha')"><div class="feat-icon">→</div><div>Dosha profiling (Vata · Pitta · Kapha) — the Ayurvedic body-type lens</div></li>
+          <li class="feat" onclick="openDetail('body-mizaj')"><div class="feat-icon">→</div><div>Mizaj typing — the Unani constitutional framework</div></li>
+          <li class="feat" onclick="openDetail('body-interaction')"><div class="feat-icon">→</div><div>Deficiency interaction map — which gaps compound each other</div></li>
+        </ul>
+      </div>
+      <div class="pillar-right">
+        <div class="ask-widget">
+          <div class="ask-header"><div class="ask-dot"></div><div class="ask-title">Try the screening — sample</div></div>
+          <div class="ask-body">
+            <p style="font-size:14px;color:var(--text-soft);line-height:1.6;margin-bottom:1rem;"><em style="font-family:'Fraunces',serif;color:var(--deep-red);">Q1.</em> Do you often feel tired in the afternoon, even after a full meal?</p>
+            <div class="ask-chips" style="margin-bottom:1rem;">
+              <span class="ask-chip" onclick="sampleAnswer(this)">Yes, almost daily</span>
+              <span class="ask-chip" onclick="sampleAnswer(this)">A few times a week</span>
+              <span class="ask-chip" onclick="sampleAnswer(this)">Rarely</span>
+            </div>
+            <p style="font-size:12px;color:var(--text-muted);font-style:italic;">15 questions. 3 minutes. Free. No login.</p>
+            <button class="btn-primary" style="margin-top:1rem;width:100%;justify-content:center;" onclick="openWaitlist()">Start the screening →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-content" id="p-food">
+      <div class="pillar-left">
+        <div class="pillar-big-num">02</div>
+        <div class="pillar-eyebrow">Pillar two</div>
+        <div class="pillar-title">Food. The What.</div>
+        <p class="pillar-body">The Food database is not a calorie counter. Every item carries its Ayurvedic properties (heating or cooling, six tastes, incompatible combinations), its TCM thermal nature, its modern nutrient profile, and its regional variants. The intelligence layer no app has assembled.</p>
+        <span class="pillar-badge badge-free">● Free · core database</span>
+        <ul class="pillar-features">
+          <li class="feat" onclick="openDetail('food-ayur')"><div class="feat-icon">→</div><div>Ayurvedic properties · heating/cooling, six tastes (Shadrasa), guna</div></li>
+          <li class="feat" onclick="openDetail('food-tcm')"><div class="feat-icon">→</div><div>TCM thermal nature · Hot / Warm / Neutral / Cool / Cold</div></li>
+          <li class="feat" onclick="openDetail('food-modern')"><div class="feat-icon">→</div><div>Modern nutrient profile · macros, micros, antinutrients, interactions</div></li>
+          <li class="feat" onclick="openDetail('food-viruddha')"><div class="feat-icon">→</div><div>Viruddha Ahara · incompatible food combinations flagged</div></li>
+          <li class="feat" onclick="openDetail('food-regional')"><div class="feat-icon">→</div><div>Regional variants · same food, different traditional uses</div></li>
+        </ul>
+      </div>
+      <div class="pillar-right">
+        <h3 style="font-family:'Fraunces',serif;font-size:20px;font-weight:500;color:var(--text);margin-bottom:1rem;">Sample food profile · <em style="color:var(--deep-red);">Turmeric</em></h3>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:var(--bg-paper);padding:12px 14px;border-radius:10px;border:1px solid var(--border);"><strong style="font-size:11px;color:var(--turmeric-deep);text-transform:uppercase;letter-spacing:0.08em;">Ayurveda</strong><div style="font-size:14px;color:var(--text-soft);margin-top:4px;">Heating (ushna) · Bitter + Pungent · Pacifies Kapha &amp; Vata</div></div>
+          <div style="background:var(--bg-paper);padding:12px 14px;border-radius:10px;border:1px solid var(--border);"><strong style="font-size:11px;color:var(--turmeric-deep);text-transform:uppercase;letter-spacing:0.08em;">TCM</strong><div style="font-size:14px;color:var(--text-soft);margin-top:4px;">Warm · Pungent · Bitter · Moves Qi and Blood</div></div>
+          <div style="background:var(--bg-paper);padding:12px 14px;border-radius:10px;border:1px solid var(--border);"><strong style="font-size:11px;color:var(--turmeric-deep);text-transform:uppercase;letter-spacing:0.08em;">Modern</strong><div style="font-size:14px;color:var(--text-soft);margin-top:4px;">Curcumin · anti-inflammatory · enhanced 2000× with black pepper</div></div>
+          <div style="background:var(--bg-paper);padding:12px 14px;border-radius:10px;border:1px solid var(--border);"><strong style="font-size:11px;color:var(--turmeric-deep);text-transform:uppercase;letter-spacing:0.08em;">Combine with</strong><div style="font-size:14px;color:var(--text-soft);margin-top:4px;">Black pepper · Ghee · Warm milk (golden milk)</div></div>
+          <button class="btn-secondary" style="margin-top:8px;width:100%;justify-content:center;" onclick="openDetail('food-turmeric-full')">See full Turmeric profile →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-content" id="p-nutrition">
+      <div class="pillar-left">
+        <div class="pillar-big-num">03</div>
+        <div class="pillar-eyebrow">Pillar three</div>
+        <div class="pillar-title">Nutrition. The Process.</div>
+        <p class="pillar-body">Nutrition is not a list of vitamins. It is the body's internal economy. From digestion and absorption through hormones and the new peptide frontier. Ask Aahaar anything about how your body works with food. Get an answer with citations you can verify.</p>
+        <span class="pillar-badge badge-premium">● Ask Aahaar · 5 free / day, then A$2.99</span>
+        <ul class="pillar-features">
+          <li class="feat" onclick="openDetail('nut-vitamins')"><div class="feat-icon">→</div><div>Vitamins · Minerals · Supplements — the OTC escalation layer (affiliate-curated, disclosed)</div></li>
+          <li class="feat" onclick="openDetail('nut-hormones')"><div class="feat-icon">→</div><div>Hormones · how food affects your hormonal landscape (educational only)</div></li>
+          <li class="feat" onclick="openDetail('nut-peptides')"><div class="feat-icon">→</div><div>Peptides · the frontier of food-body interaction (educational only)</div></li>
+          <li class="feat" onclick="openDetail('nut-digestion')"><div class="feat-icon">→</div><div>Digestion · gas · H. pylori · excretion — every body process, with citations</div></li>
+        </ul>
+      </div>
+      <div class="pillar-right">
+        <div class="ask-widget">
+          <div class="ask-header"><div class="ask-dot"></div><div class="ask-title">Ask Aahaar</div><div class="ask-subtitle">sourced answers only</div></div>
+          <div class="ask-body">
+            <div class="ask-input-wrap">
+              <input class="ask-input" type="text" placeholder="Why do I get bloated after beans?" id="askInput" onkeydown="if(event.key==='Enter') showAnswer()">
+              <button class="ask-send" onclick="showAnswer()">Ask</button>
+            </div>
+            <div class="ask-chips">
+              <span class="ask-chip" onclick="fillAsk('Why do I get H. pylori?')">H. pylori</span>
+              <span class="ask-chip" onclick="fillAsk('What blocks iron absorption?')">Iron block</span>
+              <span class="ask-chip" onclick="fillAsk('How does Agni relate to digestion?')">Agni</span>
+              <span class="ask-chip" onclick="fillAsk('What is gut transit time?')">Gut transit</span>
+            </div>
+            <div class="ask-answer" id="askAnswer">
+              <div class="ask-answer-text" id="askAnswerText">Beans contain oligosaccharides — complex sugars human enzymes cannot break down. They reach the large intestine intact, where gut bacteria ferment them, producing hydrogen, carbon dioxide and sometimes methane gas. Soaking beans overnight and discarding the water before cooking removes a significant portion of these sugars. This is why traditional dal preparation across India soaks pulses for hours.</div>
+              <div class="ask-cite">
+                <span style="color:var(--text-muted);">Sources:</span>
+                <a class="cite-tag" href="https://www.niddk.nih.gov" target="_blank" rel="noopener">NIH/NIDDK</a>
+                <a class="cite-tag" href="https://nutritionsource.hsph.harvard.edu" target="_blank" rel="noopener">Harvard T.H. Chan</a>
+                <a class="cite-tag" href="https://www.nin.res.in" target="_blank" rel="noopener">ICMR-NIN</a>
+              </div>
+              <div class="ask-disclaimer">Educational information only. Aahaar is not a medical device and does not provide medical advice. Consult a qualified health professional before changing your diet or routine.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-content" id="p-diet">
+      <div class="pillar-left">
+        <div class="pillar-big-num">04</div>
+        <div class="pillar-eyebrow">Pillar four</div>
+        <div class="pillar-title">Diet. The Habit.</div>
+        <p class="pillar-body">Diet is not what you eat. Diet is the pattern, the rhythm, the sequence. The ancient science of the eating act itself. This is the pillar that makes Aahaar structurally unlike every calorie tracker on the market.</p>
+        <span class="pillar-badge badge-premium">● Premium depth · A$2.99</span>
+        <ul class="pillar-features">
+          <li class="feat" onclick="openDetail('diet-sequence')"><div class="feat-icon">→</div><div>Eating sequence science · what order you eat foods in, and why it matters</div></li>
+          <li class="feat" onclick="openDetail('diet-dinacharya')"><div class="feat-icon">→</div><div>Dinacharya · the Ayurvedic daily eating regimen, with modern evidence</div></li>
+          <li class="feat" onclick="openDetail('diet-ritu')"><div class="feat-icon">→</div><div>Ritucharya · seasonal eating rules across traditions</div></li>
+          <li class="feat" onclick="openDetail('diet-timing')"><div class="feat-icon">→</div><div>Fasting windows · meal timing · chronobiology of eating</div></li>
+        </ul>
+      </div>
+      <div class="pillar-right">
+        <div style="background:var(--bg-paper);padding:1.5rem;border-radius:12px;border:1px solid var(--border);">
+          <div style="font-family:'Fraunces',serif;font-style:italic;color:var(--turmeric-deep);font-size:13px;margin-bottom:10px;">When traditions disagree, we tell you both.</div>
+          <div style="font-size:14px;color:var(--text-soft);line-height:1.6;margin-bottom:1rem;"><strong style="color:var(--text);">Modern nutrition</strong> says: eat 5–6 small meals daily for blood sugar regulation.<br><br><strong style="color:var(--text);">Ayurveda</strong> says: eat 2 main meals with a 6-hour gap to allow Agni to complete digestion.</div>
+          <div style="font-size:13px;color:var(--text-muted);font-style:italic;line-height:1.6;">Both have supporting evidence. Aahaar presents both — with sources — and lets you decide based on your body and your context. This is the aggregator-augmenter thesis made real.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-content" id="p-regional">
+      <div class="pillar-left">
+        <div class="pillar-big-num">05</div>
+        <div class="pillar-eyebrow">Pillar five</div>
+        <div class="pillar-title">Regional. Ancestral.</div>
+        <p class="pillar-body">No app in the market treats regional and ancestral eating as a structural pillar. It is always a filter on a database. Aahaar makes it a first-class lens — because your region's food IS its ancestral medicine. Punjab's ghee. Kerala's coconut and spice. Tamil Nadu's Siddha tradition. Bengal's fermented foods.</p>
+        <span class="pillar-badge badge-coming">● Coming Soon · the largest white space</span>
+        <ul class="pillar-features">
+          <li class="feat" onclick="openDetail('reg-india')"><div class="feat-icon">→</div><div>Region-by-region ancestral diet maps · India · South Asia · global</div></li>
+          <li class="feat" onclick="openDetail('reg-seasonal')"><div class="feat-icon">→</div><div>Seasonal availability by climate zone</div></li>
+          <li class="feat" onclick="openDetail('reg-diaspora')"><div class="feat-icon">→</div><div>Diaspora intelligence · your home region's foods, wherever you live</div></li>
+          <li class="feat" onclick="openDetail('reg-traditions')"><div class="feat-icon">→</div><div>Traditional medicine systems · Ayurveda, Siddha, Unani by geography</div></li>
+        </ul>
+      </div>
+      <div class="pillar-right">
+        <h3 style="font-family:'Fraunces',serif;font-size:20px;font-weight:500;color:var(--text);margin-bottom:1rem;">India · a sample regional map</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <div onclick="openDetail('reg-punjab')" style="background:var(--bg-paper);padding:10px 12px;border-radius:10px;border:1px solid var(--border);cursor:pointer;"><div style="font-family:'Fraunces',serif;color:var(--deep-red);font-weight:500;">Punjab</div><div style="font-size:11px;color:var(--text-muted);font-style:italic;">ghee, wheat, dairy</div></div>
+          <div onclick="openDetail('reg-kerala')" style="background:var(--bg-paper);padding:10px 12px;border-radius:10px;border:1px solid var(--border);cursor:pointer;"><div style="font-family:'Fraunces',serif;color:var(--deep-red);font-weight:500;">Kerala</div><div style="font-size:11px;color:var(--text-muted);font-style:italic;">coconut, spice, fish</div></div>
+          <div onclick="openDetail('reg-tn')" style="background:var(--bg-paper);padding:10px 12px;border-radius:10px;border:1px solid var(--border);cursor:pointer;"><div style="font-family:'Fraunces',serif;color:var(--deep-red);font-weight:500;">Tamil Nadu</div><div style="font-size:11px;color:var(--text-muted);font-style:italic;">millets, Siddha herbs</div></div>
+          <div onclick="openDetail('reg-bengal')" style="background:var(--bg-paper);padding:10px 12px;border-radius:10px;border:1px solid var(--border);cursor:pointer;"><div style="font-family:'Fraunces',serif;color:var(--deep-red);font-weight:500;">Bengal</div><div style="font-size:11px;color:var(--text-muted);font-style:italic;">fish, rice, fermented</div></div>
+          <div onclick="openDetail('reg-gujarat')" style="background:var(--bg-paper);padding:10px 12px;border-radius:10px;border:1px solid var(--border);cursor:pointer;"><div style="font-family:'Fraunces',serif;color:var(--deep-red);font-weight:500;">Gujarat</div><div style="font-size:11px;color:var(--text-muted);font-style:italic;">Jain dietary tradition</div></div>
+          <div onclick="openDetail('reg-rajasthan')" style="background:var(--bg-paper);padding:10px 12px;border-radius:10px;border:1px solid var(--border);cursor:pointer;"><div style="font-family:'Fraunces',serif;color:var(--deep-red);font-weight:500;">Rajasthan</div><div style="font-size:11px;color:var(--text-muted);font-style:italic;">desert-adapted foods</div></div>
+        </div>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:1rem;font-style:italic;">Multilingual support · 15 languages at launch · multimodal in phase 2</p>
+      </div>
+    </div>
+
+    <div class="pillar-content" id="p-swap">
+      <div class="pillar-left">
+        <div class="pillar-big-num">06</div>
+        <div class="pillar-eyebrow">Pillar six · the signature feature</div>
+        <div class="pillar-title">Natural Swap Engine.</div>
+        <p class="pillar-body">The signature pillar. Systematic industrial-to-natural replacements sourced from Ayurveda, Naturopathy, TCM, and Unani. Every swap carries its tradition of origin and modern evidence where it exists. Click any swap below — or scroll down for the full grid.</p>
+        <span class="pillar-badge badge-free">● Free · core swaps always free</span>
+        <ul class="pillar-features">
+          <li class="feat" onclick="openSwap('toothpaste')"><div class="feat-icon">→</div><div>Toothpaste → Neem twig (Ayurveda · antibacterial confirmed)</div></li>
+          <li class="feat" onclick="openSwap('seedoil')"><div class="feat-icon">→</div><div>Seed oils → Ghee or cold-pressed coconut (Ayurveda + Naturopathy)</div></li>
+          <li class="feat" onclick="openSwap('sugar')"><div class="feat-icon">→</div><div>White sugar → Jaggery, date sugar, or raw honey (all traditions)</div></li>
+          <li class="feat" onclick="openSwap('salt')"><div class="feat-icon">→</div><div>Refined salt → Himalayan or sea salt (mineral profile preserved)</div></li>
+        </ul>
+      </div>
+      <div class="pillar-right">
+        <div style="background:var(--bg-paper);padding:1.5rem;border-radius:12px;border:1px solid var(--border);">
+          <div style="font-family:'Fraunces',serif;font-style:italic;color:var(--turmeric-deep);font-size:13px;margin-bottom:1rem;">200+ swaps. Growing weekly.</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem;">
+            <span class="ask-chip" onclick="openSwap('mouthwash')">Mouthwash → oil pulling</span>
+            <span class="ask-chip" onclick="openSwap('deodorant')">Deodorant → alum</span>
+            <span class="ask-chip" onclick="openSwap('shampoo')">Shampoo → reetha</span>
+            <span class="ask-chip" onclick="openSwap('antacid')">Antacids → fennel</span>
+            <span class="ask-chip" onclick="openSwap('milk')">Cow milk → A2 / nut milk</span>
+            <span class="ask-chip" onclick="openSwap('snack')">Chips → roasted chana</span>
+          </div>
+          <a href="#swaps" class="btn-secondary" style="display:block;text-align:center;">See the full swap grid ↓</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-content" id="p-organise">
+      <div class="pillar-left">
+        <div class="pillar-big-num">07</div>
+        <div class="pillar-eyebrow">Pillar seven</div>
+        <div class="pillar-title">Organise &amp; Prepare.</div>
+        <p class="pillar-body">Knowing what to eat is half the work. Organising your kitchen, your weekly shopping, your meal prep — that is the other half. Aahaar turns its intelligence into a practical daily operating system.</p>
+        <span class="pillar-badge badge-coming">● Coming Soon</span>
+        <ul class="pillar-features">
+          <li class="feat" onclick="openDetail('org-kitchen')"><div class="feat-icon">→</div><div>Ayurvedic kitchen principles · vessel types, spice combinations, prep rules</div></li>
+          <li class="feat" onclick="openDetail('org-weekly')"><div class="feat-icon">→</div><div>Weekly meal organisation · by body type, season, and region</div></li>
+          <li class="feat" onclick="openDetail('org-prep')"><div class="feat-icon">→</div><div>Soaking · sprouting · fermenting · antinutrient reduction techniques</div></li>
+          <li class="feat" onclick="openDetail('org-shopping')"><div class="feat-icon">→</div><div>Shopping lists keyed to your deficiency profile</div></li>
+        </ul>
+      </div>
+      <div class="pillar-right">
+        <h3 style="font-family:'Fraunces',serif;font-size:20px;font-weight:500;color:var(--text);margin-bottom:1rem;">Sample · soaking rules</h3>
+        <div style="font-size:13px;color:var(--text-soft);line-height:1.7;">Different pulses, different soak times. The reason behind every traditional kitchen rule.</div>
+        <div style="margin-top:1rem;display:flex;flex-direction:column;gap:8px;">
+          <div style="background:var(--bg-paper);padding:10px 14px;border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text-soft);"><strong style="color:var(--deep-red);">Rajma</strong> · 8–12 hours · phytate reduction critical</div>
+          <div style="background:var(--bg-paper);padding:10px 14px;border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text-soft);"><strong style="color:var(--deep-red);">Chickpeas</strong> · 8 hours · lectin reduction</div>
+          <div style="background:var(--bg-paper);padding:10px 14px;border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text-soft);"><strong style="color:var(--deep-red);">Almonds</strong> · 8 hours · enzyme inhibitor removal</div>
+          <div style="background:var(--bg-paper);padding:10px 14px;border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text-soft);"><strong style="color:var(--deep-red);">Mung dal</strong> · 4 hours · gentler, faster digestion</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-content" id="p-ancient">
+      <div class="pillar-left">
+        <div class="pillar-big-num">08</div>
+        <div class="pillar-eyebrow">Pillar eight</div>
+        <div class="pillar-title">Ancient Sciences.</div>
+        <p class="pillar-body">Five traditions. One spine. Ayurveda, Naturopathy, TCM, Unani, and Siddha — each with its own structural integrity. Not flattened into "ancient wisdom." Each named, sourced, and mapped to the Aahaar pillars it informs.</p>
+        <span class="pillar-badge badge-coming">● In Development</span>
+        <ul class="pillar-features">
+          <li class="feat" onclick="openTradition('ayurveda')"><div class="feat-icon">→</div><div>Ayurveda · Tridosha, Agni, Dinacharya, Ritucharya, Shadrasa</div></li>
+          <li class="feat" onclick="openTradition('naturopathy')"><div class="feat-icon">→</div><div>Naturopathy · food → herbs → supplements → pharma</div></li>
+          <li class="feat" onclick="openTradition('tcm')"><div class="feat-icon">→</div><div>TCM · thermal food energetics, five flavours, five-season eating</div></li>
+          <li class="feat" onclick="openTradition('unani')"><div class="feat-icon">→</div><div>Unani · Mizaj, four humours, dietary constitution matching</div></li>
+          <li class="feat" onclick="openTradition('siddha')"><div class="feat-icon">→</div><div>Siddha · five elements, Vatha/Pitha/Kabam, Tamil regional wisdom</div></li>
+        </ul>
+      </div>
+      <div class="pillar-right">
+        <a href="#ancient" class="btn-secondary" style="display:block;text-align:center;margin-bottom:1rem;">Jump to the Ancient Sciences section ↓</a>
+        <p style="font-size:13px;color:var(--text-soft);line-height:1.6;font-style:italic;font-family:'Fraunces',serif;">"Every tradition that survived 1,000 years did so because it answered the question that modern nutrition has only recently started asking: how does the body actually use food?"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="swaps-section" id="swaps">
+  <div class="swaps-inner">
+    <div class="reveal" style="margin-bottom: 2rem;">
+      <div class="section-label">Natural Swap Engine · signature pillar</div>
+      <h2 class="section-title">Industrial out. <em>Natural in.</em></h2>
+      <p class="section-body">Click any swap card. See what's wrong with the industrial version, what tradition the natural replacement comes from, and what modern evidence supports it. Sources included on every entry.</p>
+    </div>
+    <div class="swaps-grid">
+      <div class="swap-card reveal" onclick="openSwap('toothpaste')"><div class="swap-from"><span>Industrial toothpaste</span></div><div class="swap-arrow-wrap"><span class="swap-arrow-line"></span><span class="swap-arrow-text">becomes</span><span class="swap-arrow-line"></span></div><div class="swap-to">Neem twig</div><span class="swap-tradition">Ayurveda</span><p class="swap-click-hint">Click for the science + sources →</p></div>
+      <div class="swap-card reveal" onclick="openSwap('seedoil')"><div class="swap-from"><span>Refined seed oils</span></div><div class="swap-arrow-wrap"><span class="swap-arrow-line"></span><span class="swap-arrow-text">becomes</span><span class="swap-arrow-line"></span></div><div class="swap-to">Ghee · coconut oil</div><span class="swap-tradition">Ayurveda · Naturopathy</span><p class="swap-click-hint">Click for the science + sources →</p></div>
+      <div class="swap-card reveal" onclick="openSwap('sugar')"><div class="swap-from"><span>White sugar</span></div><div class="swap-arrow-wrap"><span class="swap-arrow-line"></span><span class="swap-arrow-text">becomes</span><span class="swap-arrow-line"></span></div><div class="swap-to">Jaggery · date sugar</div><span class="swap-tradition">Traditional · all regions</span><p class="swap-click-hint">Click for the science + sources →</p></div>
+      <div class="swap-card reveal" onclick="openSwap('salt')"><div class="swap-from"><span>Refined iodised salt</span></div><div class="swap-arrow-wrap"><span class="swap-arrow-line"></span><span class="swap-arrow-text">becomes</span><span class="swap-arrow-line"></span></div><div class="swap-to">Sendha namak</div><span class="swap-tradition">Ayurveda</span><p class="swap-click-hint">Click for the science + sources →</p></div>
+      <div class="swap-card reveal" onclick="openSwap('mouthwash')"><div class="swap-from"><span>Commercial mouthwash</span></div><div class="swap-arrow-wrap"><span class="swap-arrow-line"></span><span class="swap-arrow-text">becomes</span><span class="swap-arrow-line"></span></div><div class="swap-to">Oil pulling</div><span class="swap-tradition">Ayurveda · Dinacharya</span><p class="swap-click-hint">Click for the science + sources →</p></div>
+      <div class="swap-card reveal" onclick="openSwap('antacid')"><div class="swap-from"><span>Daily antacid tablets</span></div><div class="swap-arrow-wrap"><span class="swap-arrow-line"></span><span class="swap-arrow-text">becomes</span><span class="swap-arrow-line"></span></div><div class="swap-to">Fennel · cumin water</div><span class="swap-tradition">Ayurveda · Unani</span><p class="swap-click-hint">Click for the science + sources →</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ancient-section" id="ancient">
+  <div class="reveal">
+    <div class="section-label">Pillar 8 · Ancient Sciences</div>
+    <h2 class="section-title">Five traditions. <em>One spine.</em></h2>
+    <p class="section-body">Each tradition with its own structural integrity — not flattened into generic "ancient wisdom." Click any tradition to see its lens, its concepts, and the modern evidence that supports it.</p>
+  </div>
+  <div class="traditions-grid">
+    <div class="tradition-card reveal" onclick="openTradition('ayurveda')"><div class="tradition-name">Ayurveda</div><div class="tradition-origin">India · 5,000+ years</div><div class="tradition-lens">Body as a balance of three doshas. Digestive fire (Agni) as the root of all health.</div><div class="tradition-concepts"><span class="concept-tag">Vata</span><span class="concept-tag">Pitta</span><span class="concept-tag">Kapha</span><span class="concept-tag">Agni</span></div></div>
+    <div class="tradition-card reveal" onclick="openTradition('naturopathy')"><div class="tradition-name">Naturopathy</div><div class="tradition-origin">Western · 19th century</div><div class="tradition-lens">The healing power of nature. Treat the root cause. Food first, always.</div><div class="tradition-concepts"><span class="concept-tag">Vis Medicatrix</span><span class="concept-tag">Root cause</span></div></div>
+    <div class="tradition-card reveal" onclick="openTradition('tcm')"><div class="tradition-name">TCM</div><div class="tradition-origin">China · 2,000+ years</div><div class="tradition-lens">Food as energetic medicine. Thermal nature, five flavours, five seasons.</div><div class="tradition-concepts"><span class="concept-tag">Yin/Yang</span><span class="concept-tag">Five flavours</span></div></div>
+    <div class="tradition-card reveal" onclick="openTradition('unani')"><div class="tradition-name">Unani</div><div class="tradition-origin">Greco-Arabic · ancient</div><div class="tradition-lens">Constitutional temperament (Mizaj). Four humours. Food matched to mizaj.</div><div class="tradition-concepts"><span class="concept-tag">Mizaj</span><span class="concept-tag">Four humours</span></div></div>
+    <div class="tradition-card reveal" onclick="openTradition('siddha')"><div class="tradition-name">Siddha</div><div class="tradition-origin">Tamil · ancient</div><div class="tradition-lens">Five elements. Vatha · Pitha · Kabam. Tamil regional food wisdom.</div><div class="tradition-concepts"><span class="concept-tag">5 elements</span><span class="concept-tag">Tamil wisdom</span></div></div>
+  </div>
+</section>
+
+<section class="spine-section" id="spine" style="max-width:100%;">
+  <div class="spine-inner">
+    <div class="reveal">
+      <div class="section-label">The Aahaar Spine</div>
+      <h2 class="section-title">Five things every tradition <em>agrees on.</em></h2>
+      <p class="section-body">Ayurveda, Naturopathy, TCM, Unani, Siddha, and modern nutritional science all converge on five principles. These are not marketing claims. They are the moat. Click any to see the cross-tradition mapping.</p>
+    </div>
+    <div class="spine-grid">
+      <div class="spine-card reveal" onclick="openDetail('spine-1')"><div class="spine-num">i.</div><div class="spine-principle">Digestive health is the foundation of all health</div><div class="spine-traditions">Ayurveda: Agni · TCM: digestive qi · Naturopathy: gut-first · Modern: microbiome</div></div>
+      <div class="spine-card reveal" onclick="openDetail('spine-2')"><div class="spine-num">ii.</div><div class="spine-principle">Seasonal and local eating is superior</div><div class="spine-traditions">Ayurveda: Ritucharya · TCM: 5 Seasons · Modern: circadian nutrition</div></div>
+      <div class="spine-card reveal" onclick="openDetail('spine-3')"><div class="spine-num">iii.</div><div class="spine-principle">The sequence of eating matters</div><div class="spine-traditions">Ayurveda: Dinacharya · TCM: composition · Modern: Stanford glycemic research</div></div>
+      <div class="spine-card reveal" onclick="openDetail('spine-4')"><div class="spine-num">iv.</div><div class="spine-principle">The body heals itself given the right inputs</div><div class="spine-traditions">Naturopathy: Vis Medicatrix · Ayurveda: Swasthavritta · Modern: homeostasis</div></div>
+      <div class="spine-card reveal" onclick="openDetail('spine-5')"><div class="spine-num">v.</div><div class="spine-principle">Natural first. Escalate in order.</div><div class="spine-traditions">Naturopathy: doctrine · Ayurveda: food → herbs → Rasayana · Aahaar: the rule</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing-section" id="pricing">
+  <div class="reveal">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Generous free tier. <em>No subscriptions.</em> Ever.</h2>
+    <p class="section-body">Pay-per-generation for premium depth. Priced at purchasing power parity globally. India base: ₹100. Other regions adjusted to local PPP.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card reveal">
+      <div class="price-tier">Free Forever</div>
+      <div class="price-amount">Free <span>· no login</span></div>
+      <div class="price-desc">No login required for the essentials</div>
+      <ul class="price-features">
+        <li><span class="check">✓</span>3-minute deficiency screening questionnaire</li>
+        <li><span class="check">✓</span>Deficiency interaction map</li>
+        <li><span class="check">✓</span>Core Natural Swaps library (200+ pairs)</li>
+        <li><span class="check">✓</span>Food database — basic item lookup</li>
+        <li><span class="check">✓</span>Ask Aahaar · 5 free queries per day</li>
+        <li><span class="check">✓</span>Ancient Sciences · all educational content</li>
+      </ul>
+    </div>
+    <div class="price-card featured reveal">
+      <div class="price-tier featured-badge">Premium Depth</div>
+      <div class="price-amount">A$2.99 <span>· per generation</span></div>
+      <div class="price-desc">Per generation. No subscription. Pay only when you use it.</div>
+      <ul class="price-features">
+        <li><span class="check">✓</span>Full deficiency deep-dive report</li>
+        <li><span class="check">✓</span>Personalised swap recommendations by body type</li>
+        <li><span class="check">✓</span>Ask Aahaar · unlimited sourced explainers</li>
+        <li><span class="check">✓</span>Diet habit plan · occupation, age, season personalised</li>
+        <li><span class="check">✓</span>Regional ancestral diet map for your geography</li>
+        <li><span class="check">✓</span>Affiliate-curated supplements (fully disclosed)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="waitlist-band" id="waitlist-cta">
+  <div class="waitlist-band-inner">
+    <h2>Join the waitlist. <em>50% off when we launch.</em></h2>
+    <p>Be first to experience Aahaar. Get 50% off your first 12 premium generations when we go live. Free tier remains free forever.</p>
+    <button class="btn-primary" onclick="openWaitlist()">Reserve Your Spot →</button>
+  </div>
+</section>
+
+<section class="disclaimers-section" id="disclaimers">
+  <div class="reveal">
+    <div class="section-label">Disclaimers · because Rule 10 matters</div>
+    <h2 class="section-title">The promises we keep. <em>Made visible.</em></h2>
+  </div>
+  <div class="disclaimers-grid">
+    <div class="disclaimer-card reveal"><div class="disclaimer-icon">✕</div><div class="disclaimer-card-title">Not Medical Advice</div><p class="disclaimer-card-text">Aahaar is an educational food intelligence platform. It does not diagnose, prescribe, or replace qualified medical advice. Consult a health professional before changing your diet or health routine.</p></div>
+    <div class="disclaimer-card reveal"><div class="disclaimer-icon">✓</div><div class="disclaimer-card-title">Verified Sources Only</div><p class="disclaimer-card-text">All claims sourced from government bodies, peer-reviewed research, or established institutional authorities (WHO, ICMR-NIN, NIH, NHS, AYUSH, CCRAS). Zero sponsored content.</p></div>
+    <div class="disclaimer-card reveal"><div class="disclaimer-icon">⊙</div><div class="disclaimer-card-title">Your Data Stays Yours</div><p class="disclaimer-card-text">Edge-node architecture. Your personal health data never leaves your device. No server-side storage of health information. A privacy promise, not just an architecture choice.</p></div>
+    <div class="disclaimer-card reveal"><div class="disclaimer-icon">↑</div><div class="disclaimer-card-title">Natural First. Always.</div><p class="disclaimer-card-text">The escalation order is fixed and public: natural food first → supplements where deficient → hormones/peptides as frontier (educational only, never prescribed). Never the reverse.</p></div>
+    <div class="disclaimer-card reveal"><div class="disclaimer-icon">◊</div><div class="disclaimer-card-title">Traditional + Modern</div><p class="disclaimer-card-text">Ayurveda, Naturopathy, TCM, Unani, Siddha content presented as traditional practice plus available modern evidence — never as medical treatment. Where traditions and modern science disagree, both positions are shown.</p></div>
+    <div class="disclaimer-card reveal"><div class="disclaimer-icon">§</div><div class="disclaimer-card-title">TGA-Aligned</div><p class="disclaimer-card-text">Aahaar operates as an educational wellness platform, not a medical device, in line with TGA (Australia) guidelines. No diagnosis, no treatment recommendations, no personalised clinical advice. General information only.</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Aahaar</div>
+      <div class="footer-tagline">Know your food. Heal from within.</div>
+      <p class="footer-desc">An aggregator-augmenter of validated food and nutrition intelligence. A fork of Artigellence. Built by Raj Singh in Sydney, Australia.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Pillars</div>
+      <ul class="footer-col-list">
+        <li><a href="#pillars">Know Your Body</a></li>
+        <li><a href="#pillars">Food · Diet · Nutrition</a></li>
+        <li><a href="#swaps">Natural Swaps</a></li>
+        <li><a href="#ancient">Ancient Sciences</a></li>
+        <li><a href="#spine">The Spine</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Platform</div>
+      <ul class="footer-col-list">
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#" onclick="openWaitlist();return false;">Join Waitlist</a></li>
+        <li><a href="#disclaimers">Disclaimers</a></li>
+        <li><a href="#disclaimers">Privacy</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact · Raj Singh</div>
+      <ul class="footer-col-list">
+        <li class="contact-line"><span class="contact-icon">@</span><a href="mailto:raj@artigellence.com">raj@artigellence.com</a></li>
+        <li class="contact-line"><span class="contact-icon">↗</span><a href="https://rajsingh.online" target="_blank" rel="noopener">rajsingh.online</a></li>
+        <li class="contact-line"><span class="contact-icon">☎</span><a href="tel:+61469313323">+61 469 313 323</a></li>
+        <li class="contact-line" style="margin-top:6px;font-size:12px;color:var(--text-muted);">Sydney NSW · Australia</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-legal">
+    <div>© 2026 Artigellence Augmentation Aggregator · ABN 93 988 690 362 · aahaar.artigellence.com</div>
+    <div class="footer-legal-italic">Educational information only. Not medical advice. Not a medical device.</div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="waitlistModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('waitlistModal')">×</button>
+    <div class="modal-eyebrow">Early access</div>
+    <h2 class="modal-title">Reserve your spot.<br><em style="font-style:italic;color:var(--deep-red);">50% off</em> at launch.</h2>
+    <form id="waitlistForm" onsubmit="submitWaitlist(event)">
+      <div class="modal-section"><div class="modal-section-label">Your name</div><input class="ask-input" type="text" name="name" placeholder="First name" required style="width:100%;background:var(--surface);"></div>
+      <div class="modal-section"><div class="modal-section-label">Email</div><input class="ask-input" type="email" name="email" placeholder="your@email.com" required style="width:100%;background:var(--surface);"></div>
+      <div class="modal-section"><div class="modal-section-label">Region (for PPP pricing)</div><select name="region" class="ask-input" style="width:100%;background:var(--surface);"><option value="">Select your region</option><option value="IN">India</option><option value="AU">Australia / New Zealand</option><option value="US">USA / Canada</option><option value="UK">UK / Europe</option><option value="SG">Singapore / SE Asia</option><option value="OTHER">Other</option></select></div>
+      <div class="modal-section"><div class="modal-section-label">WhatsApp (optional)</div><input class="ask-input" type="tel" name="whatsapp" placeholder="+91 / +61 / +1 ..." style="width:100%;background:var(--surface);"></div>
+      <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:0.5rem;">Reserve My 50% Off →</button>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:1rem;font-style:italic;text-align:center;">By joining, you accept that Aahaar is educational only. Your data stays yours · edge-node architecture · no spam.</p>
+    </form>
+    <div id="waitlistSuccess" style="display:none;text-align:center;padding:2rem 0;">
+      <div style="font-size:56px;color:var(--leaf);margin-bottom:1rem;">✓</div>
+      <h3 style="font-family:'Fraunces',serif;font-size:28px;font-weight:500;color:var(--text);margin-bottom:1rem;">You're on the list.</h3>
+      <p style="font-size:15px;color:var(--text-soft);">Welcome to Aahaar. Your <strong style="color:var(--deep-red);">50% off</strong> is reserved. We'll email you the moment we launch.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="detailModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('detailModal')">×</button>
+    <div id="detailContent"></div>
+  </div>
+</div>
+
+<script>
+function showPillar(id, btn) {
+  document.querySelectorAll('.pillar-content').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.pillar-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('p-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+const answers = {
+  'Why do I get H. pylori?': 'H. pylori is a bacterium that infects the stomach lining. It is typically acquired in childhood through contaminated water, food, or close contact. The bacteria produces urease, which neutralises stomach acid, letting it survive in the acidic gastric environment. It affects roughly 50% of the global population, with higher prevalence where clean water access is limited. Most infections are silent, but in some people it disrupts the stomach\'s protective mucus layer, leading to gastritis or ulcers.',
+  'What blocks iron absorption?': 'Several compounds block iron absorption. Phytates (in grains, legumes, nuts) bind iron in the digestive tract. Oxalates (spinach, rhubarb) do the same. Tannins in tea and coffee — consumed with or right after a meal — significantly reduce iron uptake. Calcium competes with iron for the same absorption pathway. Cooking, soaking, and fermenting reduce phytate content significantly — a key reason traditional Indian methods (soaking dals overnight, fermenting idli batter) improve nutrient availability.',
+  'How does Agni relate to digestion?': 'In Ayurveda, Agni — the digestive fire — governs the transformation of food into nutrients the body can use. A balanced Agni (sama agni) means food is digested completely, leaving no toxic residue (ama). An impaired Agni leads to incomplete digestion and the root of most disease according to Ayurvedic theory. Modern digestive science offers a parallel: optimal stomach acid, bile, and pancreatic enzyme production are collectively the functional equivalent of sama agni. Both frameworks agree: digestive capacity is the master variable.',
+  'What is gut transit time?': 'Gut transit time is the duration food takes to travel from mouth to elimination — typically 24 to 72 hours in healthy adults. Faster transit (under 20 hours) may reduce nutrient absorption. Slower transit (over 72 hours) is linked with constipation and increased exposure to harmful metabolites. Transit time is influenced by fibre intake, hydration, activity, stress, sleep, and microbiome composition. Dietary fibre from whole grains, legumes, and vegetables consistently correlates with optimal transit time across both modern research and traditional dietary guidance.'
+};
+function fillAsk(q) { document.getElementById('askInput').value = q; showAnswer(q); }
+function heroFillAsk(q) { document.getElementById('heroAskInput').value = q; heroShowAnswer(q); }
+function heroShowAnswer(q) {
+  const input = q || document.getElementById('heroAskInput').value;
+  const textEl = document.getElementById('heroAskAnswerText');
+  const answer = answers[input] || (input.trim() ? 'This is a Beta · Proof of Concept. The production Ask Aahaar engine will answer this with citations from WHO, ICMR-NIN, NIH, NHS, AYUSH, and Examine.com. Join the waitlist to be first to use the live version.' : answers['Why do I get H. pylori?']);
+  textEl.textContent = answer;
+}
+function showAnswer(q) {
+  const input = q || document.getElementById('askInput').value;
+  const textEl = document.getElementById('askAnswerText');
+  const answer = answers[input] || (input.trim() ? 'Aahaar is in development. This question would be answered via the Ask Aahaar engine — grounded in WHO, ICMR-NIN, NIH, NHS, AYUSH, and Examine.com sources, with citations linked inline. Join the waitlist to be first to use it.' : answers['Why do I get H. pylori?']);
+  textEl.textContent = answer;
+}
+function sampleAnswer(el) {
+  document.querySelectorAll('.ask-chip').forEach(c => c.style.cssText = '');
+  el.style.cssText = 'background:var(--deep-red);color:var(--bg-paper);border-color:var(--deep-red);';
+}
+
+function toggleTheme() {
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  root.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').textContent = next === 'light' ? '☾' : '☀';
+  try { localStorage.setItem('aahaar-theme', next); } catch(e) {}
+}
+try {
+  const saved = localStorage.getItem('aahaar-theme');
+  if (saved) { document.documentElement.setAttribute('data-theme', saved); }
+} catch(e) {}
+
+function changeLanguage() {
+  const lang = document.getElementById('langSelect').value;
+  const langNames = {en:'English',hi:'हिन्दी',bn:'বাংলা',ta:'தமிழ்',te:'తెలుగు',pa:'ਪੰਜਾਬੀ',ur:'اُردُو',zh:'中文',es:'Español',ar:'العربية',pt:'Português',ru:'Русский',ja:'日本語',fr:'Français',de:'Deutsch'};
+  if (lang !== 'en') {
+    showDetail('<div class="modal-eyebrow">Coming soon</div><h2 class="modal-title">Aahaar in <em>' + langNames[lang] + '</em></h2><p style="font-size:15px;color:var(--text-soft);line-height:1.6;">Full ' + langNames[lang] + ' translation is in development for our public launch.</p><p style="font-size:14px;color:var(--text-soft);line-height:1.6;margin-top:1rem;">Aahaar is being built multilingual-first, with 15 languages at launch and multimodal (voice + image) in phase 2 — reflecting our commitment to regional and ancestral eating wisdom for every diaspora.</p><div style="margin-top:1.5rem;display:flex;gap:8px;flex-wrap:wrap;"><span class="cite-tag">Hindi</span><span class="cite-tag">Bengali</span><span class="cite-tag">Tamil</span><span class="cite-tag">Telugu</span><span class="cite-tag">Punjabi</span><span class="cite-tag">Urdu</span><span class="cite-tag">Mandarin</span><span class="cite-tag">Spanish</span><span class="cite-tag">Arabic</span><span class="cite-tag">+ 6 more</span></div><button class="btn-primary" style="margin-top:1.5rem;width:100%;justify-content:center;" onclick="closeModal(\'detailModal\');openWaitlist();">Join waitlist · be notified →</button>');
+    document.getElementById('langSelect').value = 'en';
+  }
+}
+
+function openModal(id) { document.getElementById(id).classList.add('show'); document.body.style.overflow = 'hidden'; }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); document.body.style.overflow = ''; }
+function openWaitlist() {
+  document.getElementById('waitlistForm').style.display = 'block';
+  document.getElementById('waitlistSuccess').style.display = 'none';
+  openModal('waitlistModal');
+}
+function submitWaitlist(e) {
+  e.preventDefault();
+  document.getElementById('waitlistForm').style.display = 'none';
+  document.getElementById('waitlistSuccess').style.display = 'block';
+}
+document.querySelectorAll('.modal-overlay').forEach(o => o.addEventListener('click', e => { if (e.target === o) closeModal(o.id); }));
+function showDetail(html) { document.getElementById('detailContent').innerHTML = html; openModal('detailModal'); }
+
+const swaps = {
+  toothpaste: { eyebrow: 'Natural Swap · Ayurveda', title: 'Toothpaste → <em>Neem twig</em>', tradition: 'Ayurveda · Dinacharya', problem: 'Industrial toothpaste often contains SLS (foaming agent linked to oral ulcers), triclosan (endocrine disruptor, banned in many countries), artificial sweeteners, and fluoride at concentrations not safe for ingestion.', natural: 'A fresh neem twig (datun) is chewed at one end into a brush, then used to clean teeth. The neem releases natural antibacterial compounds (nimbidin, gedunin) directly onto gums and teeth.', evidence: 'Multiple peer-reviewed studies confirm neem\'s antibacterial activity against major oral pathogens including S. mutans and P. gingivalis. WHO has recognised neem-based oral hygiene as a viable traditional practice.', sources: [['CCRAS', 'https://ccras.nic.in'], ['PubMed: neem dental', 'https://pubmed.ncbi.nlm.nih.gov'], ['AYUSH Global Portal', 'https://global.ayush.gov.in']] },
+  seedoil: { eyebrow: 'Natural Swap · Ayurveda + Naturopathy', title: 'Refined seed oils → <em>Ghee or coconut oil</em>', tradition: 'Ayurveda · Naturopathy', problem: 'Refined seed oils (sunflower, soybean, canola, corn) are high in omega-6 polyunsaturated fats that oxidise easily at cooking temperatures, creating inflammatory by-products. Industrial extraction uses hexane solvents.', natural: 'Ghee (clarified butter, Ayurvedic staple) and cold-pressed coconut oil are saturated fats stable at high heat. Ghee carries fat-soluble vitamins A, D, E, K and butyrate (gut-supportive short-chain fatty acid).', evidence: 'A growing body of research questions the cardiovascular benefit narrative around polyunsaturated seed oils, with several 2024-25 reviews supporting moderate saturated fat consumption in the context of whole-food diets. ICMR-NIN 2024 guidelines recommend variety in fat sources and moderation.', sources: [['ICMR-NIN 2024', 'https://www.nin.res.in'], ['Examine.com: ghee', 'https://examine.com'], ['Harvard T.H. Chan', 'https://nutritionsource.hsph.harvard.edu']] },
+  sugar: { eyebrow: 'Natural Swap · all traditions', title: 'White sugar → <em>Jaggery, date sugar, raw honey</em>', tradition: 'Traditional · all regions', problem: 'Refined white sugar (sucrose) is stripped of all minerals during processing. It spikes blood glucose rapidly, feeds harmful gut bacteria, and is linked to chronic inflammation, NAFLD, and metabolic dysfunction.', natural: 'Jaggery (gur) retains iron, magnesium, potassium, and B-vitamins from sugarcane. Date sugar is whole dates ground — full fibre intact. Raw honey contains antimicrobial compounds and is considered medicinal in Ayurveda (when unheated and consumed in small quantities).', evidence: 'Glycemic comparison studies show jaggery causes a more gradual glucose rise than refined sugar. Honey has documented antibacterial activity and is included in WHO traditional medicine references.', sources: [['ICMR-NIN 2024', 'https://www.nin.res.in'], ['CCRAS', 'https://ccras.nic.in'], ['WHO Traditional Medicine', 'https://www.who.int']] },
+  salt: { eyebrow: 'Natural Swap · Ayurveda', title: 'Refined iodised salt → <em>Sendha namak (rock salt)</em>', tradition: 'Ayurveda', problem: 'Refined table salt is processed to 99.9% sodium chloride with anti-caking agents (often containing aluminum compounds). The mineral profile of natural salt is stripped during refining.', natural: 'Sendha namak (Himalayan rock salt) retains 80+ trace minerals — magnesium, potassium, calcium. Considered the highest-quality salt in Ayurveda, classified as cooling and tridoshic (balances all three doshas). Used by Jains and during fasting periods.', evidence: 'Trace mineral content of unrefined salts has been documented; however, modern public-health authorities note that iodised salt addresses iodine deficiency at population scale. Aahaar position: use sendha namak for daily cooking, supplement iodine from sea vegetables or fish.', sources: [['CCRAS', 'https://ccras.nic.in'], ['ICMR-NIN 2024', 'https://www.nin.res.in']] },
+  mouthwash: { eyebrow: 'Natural Swap · Ayurveda · Dinacharya', title: 'Mouthwash → <em>Oil pulling (gandusha)</em>', tradition: 'Ayurveda · Dinacharya practice', problem: 'Alcohol-based mouthwashes destroy beneficial oral bacteria along with harmful ones, disrupting the oral microbiome. Some studies link daily alcohol mouthwash use with oral microbiome dysbiosis.', natural: 'Oil pulling — swishing 1 tablespoon of sesame or coconut oil for 10-20 minutes — is part of Dinacharya (daily Ayurvedic regimen). Lauric acid in coconut oil has confirmed antimicrobial activity against S. mutans.', evidence: 'Multiple clinical trials show oil pulling reduces plaque, gingivitis, and oral bacterial load comparably to chlorhexidine mouthwash, without the side effects.', sources: [['AYUSH Global Portal', 'https://global.ayush.gov.in'], ['PubMed: oil pulling', 'https://pubmed.ncbi.nlm.nih.gov']] },
+  antacid: { eyebrow: 'Natural Swap · Ayurveda + Unani', title: 'Daily antacid tablets → <em>Fennel + cumin water</em>', tradition: 'Ayurveda · Unani', problem: 'Long-term PPI use is associated with B12 deficiency, magnesium depletion, increased fracture risk, and SIBO. Daily antacid use can mask underlying digestive dysfunction without addressing the root cause.', natural: 'Saunf (fennel) + jeera (cumin) tea — boil 1 tsp each in water, drink warm after meals. Both are carminatives (gas-relieving) and digestive stimulants in Ayurveda and Unani.', evidence: 'Fennel essential oil has documented antispasmodic and gas-relieving effects. Cumin has been shown to stimulate digestive enzyme secretion. Both are widely used in traditional digestive remedies across India, the Mediterranean, and Middle East.', sources: [['CCRAS', 'https://ccras.nic.in'], ['CCRUM (Unani)', 'https://ccrum.res.in'], ['Examine.com: fennel', 'https://examine.com']] },
+  deodorant: { eyebrow: 'Natural Swap', title: 'Aluminum deodorant → <em>Alum (phitkari) crystal</em>', tradition: 'Ayurveda · folk practice', problem: 'Many commercial antiperspirants use aluminum compounds (aluminum zirconium tetrachlorohydrex) to block sweat glands. While not conclusively linked to disease, the long-term effects of daily aluminum absorption through skin remain debated.', natural: 'Phitkari (potassium alum) crystal is moistened and applied to underarms. It is mildly antibacterial without blocking sweat glands.', evidence: 'Alum has documented antibacterial properties. Aahaar position: where evidence is mixed, optionality and disclosure matter more than dogma.', sources: [['CCRAS', 'https://ccras.nic.in']] },
+  shampoo: { eyebrow: 'Natural Swap · Ayurveda', title: 'Industrial shampoo → <em>Reetha + shikakai + amla</em>', tradition: 'Ayurveda', problem: 'Most commercial shampoos contain SLS/SLES (harsh detergents), parabens, silicones, and synthetic fragrances. They strip natural oils and disrupt scalp microbiome.', natural: 'The traditional Indian three: reetha (soapnut, the cleanser), shikakai (the conditioner), amla (the strengthener). Soaked overnight and used as a hair wash for centuries.', evidence: 'Saponins in reetha are natural surfactants. Amla is one of the richest natural sources of vitamin C and antioxidants. Combined use is widely documented in CCRAS materials.', sources: [['CCRAS', 'https://ccras.nic.in'], ['AYUSH Global Portal', 'https://global.ayush.gov.in']] },
+  milk: { eyebrow: 'Natural Swap · context-dependent', title: 'Conventional cow milk → <em>A2 milk · nut milk</em>', tradition: 'Ayurveda · modern science', problem: 'Most conventional cow milk is A1-beta-casein dominant. A1 milk, when digested, produces beta-casomorphin-7 (BCM-7), which has been linked to digestive discomfort in some people. Ayurveda always preferred Indian humped cattle (Bos indicus, which produces A2).', natural: 'A2 milk from Indian indigenous breeds (Gir, Sahiwal). Or plant-based: almond milk (soaked + blended), oat milk, coconut milk — context-appropriate to your body type and tradition.', evidence: 'A growing body of research documents differential digestive responses to A1 vs A2 milk. Australia and New Zealand have well-developed A2 milk markets. Aahaar guidance: test what works for your body.', sources: [['Examine.com: A2 milk', 'https://examine.com'], ['CCRAS', 'https://ccras.nic.in']] },
+  snack: { eyebrow: 'Natural Swap', title: 'Industrial chips → <em>Roasted chana, makhana, nuts</em>', tradition: 'Traditional Indian snacking', problem: 'Industrial chips contain refined seed oils (oxidised at high heat), excessive salt, MSG, artificial flavours, and preservatives. They drive insulin spikes without satiety.', natural: 'Roasted chana (chickpeas) — high protein, high fibre. Makhana (fox nuts) — low calorie, mineral-rich. Soaked + roasted nuts — healthy fats and micronutrients. All traditional Indian snacking categories.', evidence: 'Chickpeas and nuts have substantial peer-reviewed evidence for cardiovascular and metabolic benefit. ICMR-NIN 2024 explicitly recommends pulses and nuts as daily food groups.', sources: [['ICMR-NIN 2024', 'https://www.nin.res.in'], ['Examine.com', 'https://examine.com']] }
+};
+
+function openSwap(key) {
+  const s = swaps[key];
+  if (!s) { showDetail('<div class="modal-eyebrow">Coming soon</div><h2 class="modal-title">This swap detail is in development</h2><p style="font-size:15px;color:var(--text-soft);line-height:1.6;">200+ swaps are being assembled with full source citations. Join the waitlist to access the complete library at launch.</p><button class="btn-primary" style="margin-top:1.5rem;width:100%;justify-content:center;" onclick="closeModal(\'detailModal\');openWaitlist();">Join waitlist →</button>'); return; }
+  let sourcesHtml = '';
+  s.sources.forEach(src => { sourcesHtml += '<a href="' + src[1] + '" target="_blank" rel="noopener">' + src[0] + ' ↗</a>'; });
+  showDetail(
+    '<div class="modal-eyebrow">' + s.eyebrow + '</div>' +
+    '<h2 class="modal-title">' + s.title + '</h2>' +
+    '<span class="modal-tradition-tag">' + s.tradition + '</span>' +
+    '<div class="modal-section"><div class="modal-section-label">The problem with industrial</div><p class="modal-section-body">' + s.problem + '</p></div>' +
+    '<div class="modal-section"><div class="modal-section-label">The natural alternative</div><p class="modal-section-body">' + s.natural + '</p></div>' +
+    '<div class="modal-section"><div class="modal-section-label">Evidence base</div><p class="modal-section-body">' + s.evidence + '</p><div class="modal-evidence">' + sourcesHtml + '</div></div>' +
+    '<p style="font-size:11px;color:var(--text-muted);font-style:italic;margin-top:1rem;">Educational information only. Not medical advice. Aahaar provides options — not prescriptions.</p>'
+  );
+}
+
+const traditions = {
+  ayurveda: { eyebrow: 'Pillar 8 · Ancient Sciences', title: 'Ayurveda', origin: 'India · 5,000+ years · earliest reference in the Atharvaveda', lens: 'The body is a balance of three biological energies — Vata (movement), Pitta (transformation), Kapha (structure). Health is balance among them. Disease is imbalance, and the root of imbalance is impaired Agni — the digestive fire.', concepts: 'Tridosha · Prakriti (constitution) · Vikriti (current state) · Agni (digestive fire) · Ama (toxic residue from incomplete digestion) · Dinacharya (daily regimen) · Ritucharya (seasonal regimen) · Shadrasa (six tastes) · Viruddha Ahara (incompatible food combinations) · Dhatus (seven tissues) · Srotas (channels) · Rasayana (rejuvenation)', aahaar: 'In Aahaar, Ayurveda informs: Pillar 1 (Dosha typing) · Pillar 2 (food properties: heating/cooling, six tastes) · Pillar 3 (Agni as parallel to digestive science) · Pillar 4 (Dinacharya, Ritucharya, eating sequence) · Pillar 6 (most natural swaps originate here) · Pillar 7 (kitchen principles).', sources: [['AYUSH Global Portal', 'https://global.ayush.gov.in'], ['CCRAS', 'https://ccras.nic.in'], ['Frontiers in Medicine 2025: Prakriti', 'https://www.frontiersin.org']] },
+  naturopathy: { eyebrow: 'Pillar 8 · Ancient Sciences', title: 'Naturopathy', origin: 'Western tradition · 19th century codified · roots in Hippocratic medicine', lens: 'Six core principles: Vis Medicatrix Naturae (the healing power of nature) · First Do No Harm · Treat the Whole Person · Doctor as Teacher · Prevention · Address the Root Cause. The escalation order — food first, herbs second, supplements third, pharmaceuticals last — is formal Naturopathic doctrine.', concepts: 'Vis Medicatrix Naturae · Therapeutic order · Root cause · Elimination diets · Herbal materia medica · Hydrotherapy · Constitutional treatment', aahaar: 'Naturopathy is the Western tradition that formalised Aahaar\'s Rule 10 — natural first, escalate in order. The Naturopathic escalation order IS the Aahaar escalation order. In Aahaar, Naturopathy informs the entire system architecture: every pillar respects the food-first principle.', sources: [['AANP', 'https://naturopathic.org'], ['ANDA Australia', 'https://www.anda.com.au'], ['CNME', 'https://cnme.org']] },
+  tcm: { eyebrow: 'Pillar 8 · Ancient Sciences', title: 'Traditional Chinese Medicine', origin: 'China · 2,000+ years · earliest text Huangdi Neijing (~200 BCE)', lens: 'Food is energetic medicine. Every food has a thermal nature (Hot · Warm · Neutral · Cool · Cold) — independent of physical temperature — and one of five flavours (Sour · Bitter · Sweet · Pungent · Salty), each with affinity to a specific organ system. Seasonal eating across Five Seasons (Spring · Summer · Late Summer · Autumn · Winter) is central.', concepts: 'Yin / Yang · Qi · Five Elements · Five Flavours · Five Seasons · Thermal nature · Organ networks · Meridians · Food therapy', aahaar: 'In Aahaar, TCM informs: Pillar 2 (food thermal nature, five flavours) · Pillar 3 (digestive qi parallel to Agni and microbiome) · Pillar 4 (five-season eating) · Pillar 5 (regional intelligence for East Asian diaspora).', sources: [['WHO ICD-11 TCM', 'https://icd.who.int'], ['Pacific College', 'https://www.pacificcollege.edu']] },
+  unani: { eyebrow: 'Pillar 8 · Ancient Sciences', title: 'Unani Tibb', origin: 'Greco-Arabic · originated with Hippocrates, refined by Avicenna · widely practised across South Asia and the Middle East', lens: 'Health is the balance of four humours (Dam · Balgham · Safra · Sauda) and the individual\'s Mizaj (temperament — hot/cold/moist/dry). Foods are matched to mizaj. Single-drug remedies (Mufradaat) are preferred before compound formulations.', concepts: 'Mizaj (temperament) · Four humours (Akhlat) · Mufradaat (single drugs) · Murakkabat (compound drugs) · Six essentials (Asbab Sitta Zarooriya)', aahaar: 'In Aahaar, Unani informs: Pillar 1 (Mizaj as Unani parallel to Dosha) · Pillar 2 (food matched to constitutional temperament) · Pillar 5 (regional intelligence for Middle Eastern and South Asian Muslim diaspora) · Pillar 6 (Unani spice remedies and digestive aids).', sources: [['CCRUM', 'https://ccrum.res.in'], ['AYUSH Global Portal', 'https://global.ayush.gov.in']] },
+  siddha: { eyebrow: 'Pillar 8 · Ancient Sciences', title: 'Siddha Medicine', origin: 'Tamil Nadu · pre-Vedic Dravidian origin · attributed to the 18 Siddhars', lens: 'Built on five elements (Aim Bhutham) and three life forces — Vatham · Pitham · Kabam (Tamil parallel to Vata · Pitta · Kapha). Strong focus on regional Tamil foods, herbs, and mineral preparations. The body and the cosmos share the same fundamental constituents.', concepts: 'Five elements · Vatham · Pitham · Kabam · 96 thathuvas (constituents) · Mukkutram · Eight diagnostic methods (Envagai Thervu)', aahaar: 'In Aahaar, Siddha informs: Pillar 1 (Vatham/Pitham/Kabam typing for Tamil users) · Pillar 5 (regional intelligence for Tamil Nadu and Tamil diaspora — Sri Lanka, Singapore, Malaysia) · Pillar 6 (Siddha-origin natural remedies) · Pillar 8 (the spine that all five traditions share).', sources: [['CCRS (Central Council for Research in Siddha)', 'https://siddhacouncil.res.in'], ['AYUSH Global Portal', 'https://global.ayush.gov.in']] }
+};
+
+function openTradition(key) {
+  const t = traditions[key];
+  let sourcesHtml = '';
+  t.sources.forEach(src => { sourcesHtml += '<a href="' + src[1] + '" target="_blank" rel="noopener">' + src[0] + ' ↗</a>'; });
+  showDetail(
+    '<div class="modal-eyebrow">' + t.eyebrow + '</div>' +
+    '<h2 class="modal-title">' + t.title + '</h2>' +
+    '<div class="modal-section"><div class="modal-section-label">Origin</div><p class="modal-section-body" style="font-style:italic;">' + t.origin + '</p></div>' +
+    '<div class="modal-section"><div class="modal-section-label">The lens</div><p class="modal-section-body">' + t.lens + '</p></div>' +
+    '<div class="modal-section"><div class="modal-section-label">Core concepts</div><p class="modal-section-body">' + t.concepts + '</p></div>' +
+    '<div class="modal-section"><div class="modal-section-label">In Aahaar</div><p class="modal-section-body">' + t.aahaar + '</p></div>' +
+    '<div class="modal-section"><div class="modal-section-label">Authoritative sources</div><div class="modal-evidence">' + sourcesHtml + '</div></div>' +
+    '<p style="font-size:11px;color:var(--text-muted);font-style:italic;margin-top:1rem;">Traditional practice presented with available modern evidence. Educational only. Not medical advice.</p>'
+  );
+}
+
+const details = {
+  'spine-1': { e: 'The Spine · i.', t: 'Digestive health is the foundation of all health', b: 'Every tradition surveyed places digestion at the centre. Ayurveda: Agni — the digestive fire — is the root of all health, and Ama (incomplete digestion) is the root of all disease. TCM: digestive qi (Spleen and Stomach) is the post-natal source of all energy. Naturopathy: gut-first healing is foundational. Unani: stomach (Mauda) is the centre of the digestive system. Modern science: the gut microbiome, gut-brain axis, and intestinal permeability are emerging as central to metabolic, immune, and neurological health.', src: [['Frontiers 2025 review', 'https://www.frontiersin.org'], ['ICMR-NIN', 'https://www.nin.res.in']] },
+  'spine-2': { e: 'The Spine · ii.', t: 'Seasonal and local eating is superior', b: 'Ayurveda formalised it as Ritucharya — six seasonal regimens. TCM organises eating around five seasons and their elemental affinities. Naturopathy emphasises whole-food local eating. Mediterranean tradition (now UNESCO Intangible Cultural Heritage) is the European equivalent. Modern science: circadian nutrition, seasonal microbiome variation, and the case for local/seasonal foods is rapidly building.', src: [['UNESCO Mediterranean Diet', 'https://www.unesco.org']] },
+  'spine-3': { e: 'The Spine · iii.', t: 'The sequence of eating matters', b: 'Ayurveda specifies eating sequence rules (heavy first, light last; specific tastes in specific order). TCM emphasises meal composition and order. Modern science: Stanford research (2023) shows food sequencing significantly affects glycemic response — eating vegetables and protein before carbohydrates reduces post-meal glucose spikes substantially.', src: [['Stanford glycemic research', 'https://med.stanford.edu']] },
+  'spine-4': { e: 'The Spine · iv.', t: 'The body heals itself given the right inputs', b: 'Naturopathy: Vis Medicatrix Naturae — the healing power of nature. Ayurveda: Swasthavritta — the science of maintaining health, presupposing self-healing capacity. TCM: restoring balance allows the body\'s innate harmony. Modern: homeostasis, immune response, tissue regeneration — all confirm the body\'s self-healing capacity when given correct inputs and removed of stressors.', src: [['AANP', 'https://naturopathic.org']] },
+  'spine-5': { e: 'The Spine · v.', t: 'Natural first. Escalate in order.', b: 'Naturopathy formalised this as the Therapeutic Order: lifestyle → diet → herbs → supplements → pharmaceuticals → surgery. Ayurveda: food → herbs → Panchakarma → Rasayana. TCM: diet → acupuncture → herbs → procedural intervention. This is the Aahaar Rule — non-negotiable. Every tradition agrees: pharmaceuticals are last, not first.', src: [['Naturopathic Therapeutic Order', 'https://naturopathic.org']] }
+};
+
+function openDetail(key) {
+  const d = details[key];
+  if (!d) { showDetail('<div class="modal-eyebrow">Coming soon</div><h2 class="modal-title">This detail is in development</h2><p style="font-size:15px;color:var(--text-soft);line-height:1.6;">Aahaar is being built pillar by pillar. The full content for this section is in development. Join the waitlist to be first.</p><button class="btn-primary" style="margin-top:1.5rem;width:100%;justify-content:center;" onclick="closeModal(\'detailModal\');openWaitlist();">Join waitlist →</button>'); return; }
+  let sourcesHtml = '';
+  d.src.forEach(src => { sourcesHtml += '<a href="' + src[1] + '" target="_blank" rel="noopener">' + src[0] + ' ↗</a>'; });
+  showDetail(
+    '<div class="modal-eyebrow">' + d.e + '</div>' +
+    '<h2 class="modal-title">' + d.t + '</h2>' +
+    '<div class="modal-section"><p class="modal-section-body">' + d.b + '</p></div>' +
+    '<div class="modal-section"><div class="modal-section-label">Sources</div><div class="modal-evidence">' + sourcesHtml + '</div></div>'
+  );
+}
+
+const observer = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</div>
+</body>
+</html>
