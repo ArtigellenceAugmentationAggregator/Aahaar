@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aahaar.artigellence.com/sitemap.xml
+
+# Aahaar — aahaar.artigellence.com
+# Built by Artigellence · Sydney · 2026
